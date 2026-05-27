@@ -36,16 +36,44 @@ body {
   font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  padding-bottom: 72px;
 }
 
-/* ─── HEADER ─── */
+/* ═══ BUTTONS ═══ */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--green-acc);
+  color: var(--white);
+  text-decoration: none;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 13px 26px;
+  border-radius: 6px;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 2px 12px rgba(47,168,110,0.3);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.btn-primary:hover {
+  background: var(--green-mid);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(47,168,110,0.4);
+}
+.btn-primary:active { transform: translateY(0); }
+.btn-primary .arrow { display: inline-block; transition: transform 0.2s; }
+.btn-primary:hover .arrow { transform: translateX(3px); }
+
+/* ═══ HEADER — mobile first ═══ */
 .site-header {
   background: var(--white);
   border-bottom: 1px solid var(--rule);
   position: sticky;
   top: 0;
   z-index: 100;
-  padding: 0 2.5rem;
+  padding: 0 1.25rem;
 }
 .header-inner {
   max-width: 1120px;
@@ -53,32 +81,33 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
-  gap: 2rem;
+  height: 60px;
+  gap: 1rem;
 }
 .header-logos {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
+  min-width: 0;
 }
 .header-logos img {
-  height: 34px;
+  height: 28px;
   width: auto;
   object-fit: contain;
   filter: grayscale(15%);
   opacity: 0.9;
+  flex-shrink: 0;
 }
-.header-logos .sep {
-  width: 1px;
-  height: 28px;
-  background: var(--rule);
-}
+.header-logos .logo-secondary,
+.header-logos .sep { display: none; }
 .header-nav {
   display: flex;
   align-items: center;
   gap: 0.25rem;
+  flex-shrink: 0;
 }
-.header-nav a {
+.nav-link {
+  display: none;
   font-size: 13px;
   font-weight: 500;
   color: var(--ink-soft);
@@ -88,21 +117,29 @@ body {
   transition: all 0.15s;
   letter-spacing: 0.01em;
 }
-.header-nav a:hover { background: var(--green-pale); color: var(--green); }
-.header-nav .cta {
+.nav-link:hover { background: var(--green-pale); color: var(--green); }
+.header-cta {
+  display: inline-flex;
+  align-items: center;
   background: var(--green);
-  color: var(--white) !important;
-  padding: 7px 18px;
+  color: var(--white);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 18px;
   border-radius: 4px;
+  transition: background 0.15s;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
 }
-.header-nav .cta:hover { background: var(--green-mid) !important; }
+.header-cta:hover { background: var(--green-mid); }
 
-/* ─── HERO ─── */
+/* ═══ HERO — mobile first ═══ */
 .hero {
   background: var(--green);
   position: relative;
   overflow: hidden;
-  padding: 5rem 2.5rem 4.5rem;
+  padding: 3.5rem 1.25rem 3rem;
 }
 .hero::before {
   content: '';
@@ -127,10 +164,6 @@ body {
   margin: 0 auto;
   position: relative;
   z-index: 1;
-  display: grid;
-  grid-template-columns: 1fr 340px;
-  gap: 4rem;
-  align-items: center;
 }
 .hero-label {
   display: inline-flex;
@@ -141,46 +174,52 @@ body {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #7dd4a8;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
 }
 .hero-label::before {
   content: '';
   display: inline-block;
-  width: 24px;
+  width: 20px;
   height: 1px;
   background: #7dd4a8;
 }
 .hero h1 {
   font-family: var(--serif);
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(1.85rem, 6vw, 3rem);
   font-weight: 400;
   color: var(--white);
   line-height: 1.18;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
-.hero h1 em {
-  font-style: italic;
-  color: #a8e6c5;
-}
+.hero h1 em { font-style: italic; color: #a8e6c5; }
 .hero-subtitle {
   font-family: var(--body);
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: rgba(255,255,255,0.72);
   font-weight: 300;
   line-height: 1.7;
-  margin-bottom: 2rem;
-  max-width: 560px;
+  margin-bottom: 1.75rem;
+}
+.hero-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.875rem;
+  margin-bottom: 2.25rem;
+}
+.hero-time {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  font-weight: 300;
 }
 .hero-meta {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
 }
-.hero-meta-item {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
+.hero-meta-item { display: flex; flex-direction: column; gap: 2px; }
 .hero-meta-item .val {
   font-family: var(--serif);
   font-size: 1.6rem;
@@ -194,21 +233,7 @@ body {
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
-.hero-card {
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.14);
-  border-radius: 12px;
-  padding: 1.75rem;
-  backdrop-filter: blur(8px);
-}
-.hero-card-title {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #7dd4a8;
-  margin-bottom: 1.25rem;
-}
+.hero-card { display: none; }
 .dimension {
   display: flex;
   align-items: center;
@@ -217,21 +242,11 @@ body {
   border-bottom: 1px solid rgba(255,255,255,0.07);
 }
 .dimension:last-child { border-bottom: none; }
-.dim-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #2fa86e;
-  flex-shrink: 0;
-}
-.dim-text {
-  font-size: 13px;
-  color: rgba(255,255,255,0.78);
-  font-weight: 300;
-}
+.dim-dot { width: 6px; height: 6px; border-radius: 50%; background: #2fa86e; flex-shrink: 0; }
+.dim-text { font-size: 13px; color: rgba(255,255,255,0.78); font-weight: 300; }
 
-/* ─── SECTION LAYOUT ─── */
-section { padding: 4rem 2.5rem; }
+/* ═══ SECTIONS — mobile first ═══ */
+section { padding: 3rem 1.25rem; }
 .section-inner { max-width: 1120px; margin: 0 auto; }
 .section-label {
   font-size: 11px;
@@ -253,7 +268,7 @@ section { padding: 4rem 2.5rem; }
 }
 .section-title {
   font-family: var(--serif);
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-size: clamp(1.4rem, 4vw, 2rem);
   font-weight: 400;
   color: var(--ink);
   line-height: 1.25;
@@ -261,21 +276,20 @@ section { padding: 4rem 2.5rem; }
 }
 .section-body {
   font-family: var(--body);
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: var(--ink-soft);
   font-weight: 300;
   line-height: 1.75;
   max-width: 680px;
 }
 
-/* ─── SOBRE ─── */
+/* ═══ SOBRE — mobile first ═══ */
 #sobre { background: var(--white); border-bottom: 1px solid var(--rule); }
 .sobre-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5rem;
-  align-items: start;
-  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  margin-top: 2.5rem;
 }
 .sobre-text p {
   font-family: var(--body);
@@ -287,7 +301,6 @@ section { padding: 4rem 2.5rem; }
 }
 .sobre-text p:last-child { margin-bottom: 0; }
 .sobre-text strong { color: var(--ink); font-weight: 500; }
-
 .objectives { list-style: none; }
 .objectives li {
   display: flex;
@@ -306,107 +319,105 @@ section { padding: 4rem 2.5rem; }
   margin-top: 2px;
   width: 28px;
 }
-.obj-text {
-  font-size: 0.95rem;
-  color: var(--ink-soft);
-  line-height: 1.6;
-  font-family: var(--body);
-  font-weight: 300;
-}
+.obj-text { font-size: 0.95rem; color: var(--ink-soft); line-height: 1.6; font-family: var(--body); font-weight: 300; }
 .obj-text strong { color: var(--ink); font-weight: 500; }
 
-/* ─── BLOCOS ─── */
+/* ═══ BLOCOS — mobile first ═══ */
 #blocos { background: var(--cream); }
 .blocos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: 1fr;
   gap: 1px;
   background: var(--rule);
   border: 1px solid var(--rule);
   border-radius: 8px;
   overflow: hidden;
-  margin-top: 3rem;
+  margin-top: 2.5rem;
 }
-.bloco-card {
-  background: var(--white);
-  padding: 1.5rem;
-  transition: background 0.15s;
-}
+.bloco-card { background: var(--white); padding: 1.25rem; transition: background 0.15s; }
 .bloco-card:hover { background: var(--green-pale); }
-.bloco-num {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--green-acc);
-  margin-bottom: 0.5rem;
-}
-.bloco-title {
-  font-family: var(--serif);
-  font-size: 1rem;
-  font-weight: 400;
-  color: var(--ink);
-  margin-bottom: 0.5rem;
-  line-height: 1.3;
-}
-.bloco-qs {
-  font-size: 12px;
-  color: var(--ink-hint);
-}
+.bloco-num { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green-acc); margin-bottom: 0.4rem; }
+.bloco-title { font-family: var(--serif); font-size: 0.95rem; font-weight: 400; color: var(--ink); margin-bottom: 0.4rem; line-height: 1.3; }
+.bloco-qs { font-size: 12px; color: var(--ink-hint); }
 
-/* ─── MATURIDADE ─── */
+/* ═══ MATURIDADE — mobile first ═══ */
 #maturidade { background: var(--white); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
 .levels-track {
   display: flex;
-  gap: 0;
-  margin-top: 3rem;
+  flex-direction: column;
+  margin-top: 2.5rem;
   border: 1px solid var(--rule);
   border-radius: 8px;
   overflow: hidden;
 }
-.level {
-  flex: 1;
-  padding: 1.25rem 1rem;
-  border-right: 1px solid var(--rule);
-  position: relative;
-}
-.level:last-child { border-right: none; }
-.level-bar {
-  height: 3px;
-  border-radius: 2px;
-  margin-bottom: 0.75rem;
-}
+.level { padding: 1.25rem; border-bottom: 1px solid var(--rule); }
+.level:last-child { border-bottom: none; }
+.level-bar { height: 3px; border-radius: 2px; margin-bottom: 0.75rem; }
 .level:nth-child(1) .level-bar { background: #d1d5db; width: 25%; }
 .level:nth-child(2) .level-bar { background: #86efac; width: 50%; }
 .level:nth-child(3) .level-bar { background: #22c55e; width: 75%; }
 .level:nth-child(4) .level-bar { background: var(--green); width: 100%; }
-.level-num {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink-hint);
-  margin-bottom: 4px;
-}
-.level-name {
-  font-family: var(--serif);
-  font-size: 0.95rem;
-  color: var(--ink);
-  font-weight: 400;
-  margin-bottom: 6px;
-}
-.level-desc {
-  font-size: 12px;
-  color: var(--ink-soft);
-  line-height: 1.55;
-  font-family: var(--body);
-  font-weight: 300;
-}
+.level-num { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-hint); margin-bottom: 4px; }
+.level-name { font-family: var(--serif); font-size: 0.95rem; color: var(--ink); font-weight: 400; margin-bottom: 6px; }
+.level-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.55; font-family: var(--body); font-weight: 300; }
 
-/* ─── FORMULÁRIO ─── */
+/* ═══ CTA SECTION (novo) — mobile first ═══ */
+.cta-section {
+  background: var(--green-pale);
+  border-top: 1px solid var(--green-rule);
+  border-bottom: 1px solid var(--green-rule);
+  padding: 3rem 1.25rem;
+}
+.cta-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+.cta-box-text h3 {
+  font-family: var(--serif);
+  font-size: clamp(1.3rem, 4vw, 1.75rem);
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 0.6rem;
+  line-height: 1.25;
+}
+.cta-box-text p {
+  font-family: var(--body);
+  font-size: 1rem;
+  color: var(--ink-soft);
+  font-weight: 300;
+  line-height: 1.7;
+}
+.cta-box .cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--green);
+  color: var(--white);
+  text-decoration: none;
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 15px 32px;
+  border-radius: 6px;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 2px 16px rgba(13,92,62,0.2);
+  letter-spacing: 0.02em;
+  align-self: flex-start;
+}
+.cta-box .cta-btn:hover {
+  background: var(--green-mid);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 24px rgba(13,92,62,0.3);
+}
+.cta-box .cta-btn:active { transform: translateY(0); }
+.cta-box .cta-btn .arrow { display: inline-block; transition: transform 0.2s; }
+.cta-box .cta-btn:hover .arrow { transform: translateX(3px); }
+
+/* ═══ FORMULÁRIO ═══ */
 #formulario { background: var(--cream); }
 .form-wrapper {
-  margin-top: 3rem;
+  margin-top: 2rem;
   background: var(--white);
   border: 1px solid var(--rule);
   border-radius: 12px;
@@ -414,107 +425,167 @@ section { padding: 4rem 2.5rem; }
 }
 .form-topbar {
   background: var(--green);
-  padding: 1rem 1.5rem;
+  padding: 1rem 1.25rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
-.form-topbar-title {
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(255,255,255,0.85);
-  letter-spacing: 0.03em;
+.form-topbar-title { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.85); letter-spacing: 0.03em; line-height: 1.4; }
+.form-topbar-badge { font-size: 11px; color: #7dd4a8; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; }
+.form-embed { width: 100%; min-height: 820px; border: none; display: block; }
+
+/* ═══ MOBILE FLOATING CTA BAR ═══ */
+.mobile-cta-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  background: rgba(255,255,255,0.97);
+  border-top: 1px solid var(--rule);
+  padding: 0.875rem 1.25rem;
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.1);
+  backdrop-filter: blur(8px);
+  transition: transform 0.35s ease, opacity 0.35s ease;
 }
-.form-topbar-badge {
-  font-size: 11px;
-  color: #7dd4a8;
+.mobile-cta-bar a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--green);
+  color: var(--white);
+  text-decoration: none;
+  font-size: 1rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  padding: 14px;
+  border-radius: 6px;
+  letter-spacing: 0.02em;
+  transition: background 0.15s;
 }
-.form-embed {
-  width: 100%;
-  min-height: 820px;
-  border: none;
-  display: block;
+.mobile-cta-bar a:hover { background: var(--green-mid); }
+.mobile-cta-bar.hidden {
+  transform: translateY(110%);
+  opacity: 0;
+  pointer-events: none;
 }
 
-/* ─── FOOTER ─── */
+/* ═══ FOOTER ═══ */
 footer {
   background: var(--ink);
-  padding: 3rem 2.5rem;
+  padding: 2.5rem 1.25rem;
 }
 .footer-inner {
   max-width: 1120px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 3rem;
-  align-items: start;
-}
-.footer-brand {
-  font-family: var(--serif);
-  font-size: 1.1rem;
-  color: var(--white);
-  font-weight: 400;
-  margin-bottom: 0.5rem;
-}
-.footer-sub {
-  font-size: 13px;
-  color: rgba(255,255,255,0.4);
-  font-weight: 300;
-  line-height: 1.6;
-}
-.footer-logos {
   display: flex;
-  gap: 1.5rem;
-  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
 }
-.footer-logos img {
-  height: 28px;
-  width: auto;
-  object-fit: contain;
-  filter: brightness(0) invert(1);
-  opacity: 0.4;
-}
-.footer-rule {
-  border: none;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  max-width: 1120px;
-  margin: 2rem auto 0;
-}
-.footer-copy {
-  max-width: 1120px;
-  margin: 1rem auto 0;
-  font-size: 12px;
-  color: rgba(255,255,255,0.25);
-}
+.footer-brand { font-family: var(--serif); font-size: 1.1rem; color: var(--white); font-weight: 400; margin-bottom: 0.5rem; }
+.footer-sub { font-size: 13px; color: rgba(255,255,255,0.4); font-weight: 300; line-height: 1.6; }
+.footer-logos { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+.footer-logos img { height: 24px; width: auto; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.4; }
+.footer-rule { border: none; border-top: 1px solid rgba(255,255,255,0.08); max-width: 1120px; margin: 2rem auto 0; }
+.footer-copy { max-width: 1120px; margin: 1rem auto 0; font-size: 12px; color: rgba(255,255,255,0.25); }
 
-/* ─── ANIMATIONS ─── */
+/* ═══ SCROLL REVEAL ═══ */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-d1 { transition-delay: 0.08s; }
+.reveal-d2 { transition-delay: 0.18s; }
+.reveal-d3 { transition-delay: 0.28s; }
+.reveal-d4 { transition-delay: 0.38s; }
+
+/* ═══ HERO FADE-IN ═══ */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.hero-inner > * { animation: fadeUp 0.6s ease both; }
-.hero-inner > *:nth-child(1) { animation-delay: 0.05s; }
-.hero-inner > *:nth-child(2) { animation-delay: 0.2s; }
+.hero-content { animation: fadeUp 0.65s ease 0.05s both; }
+.hero-card    { animation: fadeUp 0.65s ease 0.2s both; }
 
-/* ─── RESPONSIVE ─── */
-@media (max-width: 900px) {
-  .hero-inner { grid-template-columns: 1fr; }
-  .hero-card { display: none; }
-  .sobre-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-  .levels-track { flex-direction: column; }
-  .level { border-right: none; border-bottom: 1px solid var(--rule); }
-  .level:last-child { border-bottom: none; }
-  .footer-inner { grid-template-columns: 1fr; }
+/* ═══════════════════════════════════════
+   TABLET  ≥ 600px
+═══════════════════════════════════════ */
+@media (min-width: 600px) {
+  body { padding-bottom: 0; }
+
+  .site-header { padding: 0 2rem; }
+  .header-inner { height: 64px; }
+  .header-logos img { height: 32px; }
+  .header-logos .logo-secondary { display: block; }
+  .header-logos .sep { display: block; width: 1px; height: 28px; background: var(--rule); }
+  .nav-link { display: inline-flex; }
+
+  .hero { padding: 4.5rem 2rem 4rem; }
+  .hero-subtitle { font-size: 1.05rem; }
+  .hero-meta { grid-template-columns: repeat(4, auto); gap: 0 2.5rem; padding-top: 2rem; }
+
+  section { padding: 3.5rem 2rem; }
+
+  .sobre-grid { flex-direction: row; gap: 3.5rem; }
+  .sobre-grid > * { flex: 1; }
+
+  .blocos-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .levels-track { flex-direction: row; }
+  .level { flex: 1; border-bottom: none; border-right: 1px solid var(--rule); }
+  .level:last-child { border-right: none; }
+
+  .cta-section { padding: 3.5rem 2rem; }
+  .cta-box { flex-direction: row; align-items: center; justify-content: space-between; gap: 3rem; }
+  .cta-box .cta-btn { align-self: auto; flex-shrink: 0; }
+
+  footer { padding: 3rem 2rem; }
+  .footer-inner { flex-direction: row; justify-content: space-between; align-items: flex-start; }
+
+  .mobile-cta-bar { display: none; }
 }
-@media (max-width: 600px) {
-  .site-header { padding: 0 1.25rem; }
-  .header-nav a:not(.cta) { display: none; }
-  .hero { padding: 3.5rem 1.25rem 3rem; }
-  section { padding: 3rem 1.25rem; }
-  footer { padding: 2.5rem 1.25rem; }
+
+/* ═══════════════════════════════════════
+   DESKTOP  ≥ 900px
+═══════════════════════════════════════ */
+@media (min-width: 900px) {
+  .site-header { padding: 0 2.5rem; }
+
+  .hero { padding: 5rem 2.5rem 4.5rem; }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 4rem;
+    align-items: center;
+  }
+  .hero-subtitle { max-width: 560px; }
+  .hero-card {
+    display: block;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 12px;
+    padding: 1.75rem;
+    backdrop-filter: blur(8px);
+  }
+  .hero-card-title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #7dd4a8;
+    margin-bottom: 1.25rem;
+  }
+
+  section { padding: 4rem 2.5rem; }
+  .sobre-grid { gap: 5rem; }
+  .blocos-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+  .cta-section { padding: 4rem 2.5rem; }
+  footer { padding: 3rem 2.5rem; }
+  .footer-logos img { height: 28px; }
 }
 </style>
 </head>
@@ -526,15 +597,15 @@ footer {
     <div class="header-logos">
       <img src="https://www.telessaude.uerj.br/site/wp-content/uploads/sites/4/2025/09/PET_HORZINTALCOR-1024x284.png" alt="PET Telessaúde UERJ">
       <div class="sep"></div>
-      <img src="https://unemat.br/assets/img/Logo_Unemat.svg" alt="UNEMAT">
+      <img class="logo-secondary" src="https://unemat.br/assets/img/Logo_Unemat.svg" alt="UNEMAT">
       <div class="sep"></div>
-      <img src="https://www.gov.br/transferegov/pt-br/noticias/noticias/arquivos-e-imagens/ministerio-da-saude.png/@@images/image-1200-df740c5814411903e4c0ad9a432f745a.png" alt="Ministério da Saúde">
+      <img class="logo-secondary" src="https://www.gov.br/transferegov/pt-br/noticias/noticias/arquivos-e-imagens/ministerio-da-saude.png/@@images/image-1200-df740c5814411903e4c0ad9a432f745a.png" alt="Ministério da Saúde">
     </div>
     <nav class="header-nav">
-      <a href="#sobre">Sobre</a>
-      <a href="#blocos">Dimensões</a>
-      <a href="#maturidade">Níveis</a>
-      <a href="#formulario" class="cta">Responder</a>
+      <a href="#sobre" class="nav-link">Sobre</a>
+      <a href="#blocos" class="nav-link">Dimensões</a>
+      <a href="#maturidade" class="nav-link">Níveis</a>
+      <a href="#formulario" class="header-cta">Responder</a>
     </nav>
   </div>
 </header>
@@ -543,10 +614,14 @@ footer {
 <section class="hero">
   <div class="hero-grid"></div>
   <div class="hero-inner">
-    <div>
+    <div class="hero-content">
       <div class="hero-label">Pesquisa científica · Cáceres – MT</div>
       <h1>Índice de Maturidade em<br><em>Saúde Digital</em></h1>
       <p class="hero-subtitle">Instrumento de avaliação diagnóstica aplicado às unidades de saúde do município de Cáceres, vinculadas à Secretaria Municipal de Saúde, para mensurar o grau de incorporação das tecnologias digitais na atenção à saúde.</p>
+      <div class="hero-actions">
+        <a href="#formulario" class="btn-primary">Responder ao Questionário <span class="arrow">→</span></a>
+        <span class="hero-time">⏱ ~20 a 30 minutos</span>
+      </div>
       <div class="hero-meta">
         <div class="hero-meta-item">
           <span class="val">7</span>
@@ -582,16 +657,18 @@ footer {
 <!-- ─── SOBRE ─── -->
 <section id="sobre">
   <div class="section-inner">
-    <div class="section-label">Contexto da pesquisa</div>
-    <h2 class="section-title">Sobre o INMSD</h2>
+    <div class="reveal">
+      <div class="section-label">Contexto da pesquisa</div>
+      <h2 class="section-title">Sobre o INMSD</h2>
+    </div>
     <div class="sobre-grid">
-      <div class="sobre-text">
+      <div class="sobre-text reveal reveal-d1">
         <p>O <strong>Índice de Maturidade em Saúde Digital (INMSD)</strong> é um instrumento de avaliação diagnóstica desenvolvido para mensurar o grau de incorporação e uso das tecnologias digitais nos serviços de saúde.</p>
         <p>Nesta edição, o INMSD é aplicado de forma inédita no nível das <strong>unidades de saúde</strong> do município de Cáceres – MT, permitindo um mapeamento granular da realidade digital de cada estabelecimento vinculado à Secretaria Municipal de Saúde.</p>
         <p>Os resultados subsidiarão o planejamento estratégico municipal, orientarão investimentos em tecnologia e saúde digital, e contribuirão para a produção de conhecimento científico sobre a maturidade digital no SUS.</p>
         <p>Esta pesquisa é conduzida em parceria entre o <strong>PET Telessaúde UERJ</strong> e a <strong>Universidade do Estado de Mato Grosso (UNEMAT)</strong>, com apoio da Secretaria Municipal de Saúde de Cáceres.</p>
       </div>
-      <div>
+      <div class="reveal reveal-d2">
         <div class="section-label" style="margin-bottom:1rem;">Objetivos</div>
         <ol class="objectives">
           <li>
@@ -619,10 +696,12 @@ footer {
 <!-- ─── BLOCOS ─── -->
 <section id="blocos">
   <div class="section-inner">
-    <div class="section-label">Estrutura do instrumento</div>
-    <h2 class="section-title">Dimensões avaliadas</h2>
-    <p class="section-body">O instrumento está organizado em 7 dimensões temáticas, cada uma composta por indicadores com 4 níveis de maturidade progressiva.</p>
-    <div class="blocos-grid">
+    <div class="reveal">
+      <div class="section-label">Estrutura do instrumento</div>
+      <h2 class="section-title">Dimensões avaliadas</h2>
+      <p class="section-body">O instrumento está organizado em 7 dimensões temáticas, cada uma composta por indicadores com 4 níveis de maturidade progressiva.</p>
+    </div>
+    <div class="blocos-grid reveal reveal-d1">
       <div class="bloco-card">
         <div class="bloco-num">Bloco 1</div>
         <div class="bloco-title">Gestão e Governança em Saúde Digital</div>
@@ -665,10 +744,12 @@ footer {
 <!-- ─── NÍVEIS ─── -->
 <section id="maturidade">
   <div class="section-inner">
-    <div class="section-label">Escala de avaliação</div>
-    <h2 class="section-title">Níveis de maturidade</h2>
-    <p class="section-body">Cada indicador é avaliado em uma escala de 4 níveis, que variam do estágio inicial — onde praticamente nenhuma ação foi implementada — até o estágio avançado, de excelência em saúde digital.</p>
-    <div class="levels-track">
+    <div class="reveal">
+      <div class="section-label">Escala de avaliação</div>
+      <h2 class="section-title">Níveis de maturidade</h2>
+      <p class="section-body">Cada indicador é avaliado em uma escala de 4 níveis, que variam do estágio inicial — onde praticamente nenhuma ação foi implementada — até o estágio avançado, de excelência em saúde digital.</p>
+    </div>
+    <div class="levels-track reveal reveal-d1">
       <div class="level">
         <div class="level-bar"></div>
         <div class="level-num">Nível 1</div>
@@ -697,13 +778,28 @@ footer {
   </div>
 </section>
 
+<!-- ─── CTA SECTION ─── -->
+<div class="cta-section">
+  <div class="section-inner">
+    <div class="cta-box reveal">
+      <div class="cta-box-text">
+        <h3>Pronto para contribuir com a pesquisa?</h3>
+        <p>O preenchimento deve ser realizado pelo gestor ou responsável técnico da unidade de saúde. Suas respostas são confidenciais e serão usadas exclusivamente para fins científicos.</p>
+      </div>
+      <a href="#formulario" class="cta-btn">Responder agora <span class="arrow">→</span></a>
+    </div>
+  </div>
+</div>
+
 <!-- ─── FORMULÁRIO ─── -->
 <section id="formulario">
   <div class="section-inner">
-    <div class="section-label">Instrumento de coleta</div>
-    <h2 class="section-title">Responder ao questionário</h2>
-    <p class="section-body">O preenchimento deve ser realizado pelo gestor ou responsável técnico da unidade de saúde. Tempo estimado: 20 a 30 minutos.</p>
-    <div class="form-wrapper">
+    <div class="reveal">
+      <div class="section-label">Instrumento de coleta</div>
+      <h2 class="section-title">Responder ao questionário</h2>
+      <p class="section-body">O preenchimento deve ser realizado pelo gestor ou responsável técnico da unidade de saúde. Tempo estimado: 20 a 30 minutos.</p>
+    </div>
+    <div class="form-wrapper reveal reveal-d1">
       <div class="form-topbar">
         <span class="form-topbar-title">INMSD 2026 — Unidades de Saúde · Cáceres – MT</span>
         <span class="form-topbar-badge">Microsoft Forms</span>
@@ -743,6 +839,34 @@ footer {
   <hr class="footer-rule">
   <p class="footer-copy">© 2026 PET Telessaúde UERJ · UNEMAT. Uso exclusivo para fins de pesquisa científica.</p>
 </footer>
+
+<!-- ─── MOBILE FLOATING CTA ─── -->
+<div class="mobile-cta-bar" id="mobileCta">
+  <a href="#formulario">Responder ao Questionário →</a>
+</div>
+
+<script>
+// Scroll-reveal para seções
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// Oculta barra flutuante quando o formulário está visível
+const formSection = document.getElementById('formulario');
+const mobileCta = document.getElementById('mobileCta');
+if (formSection && mobileCta) {
+  const ctaObserver = new IntersectionObserver((entries) => {
+    mobileCta.classList.toggle('hidden', entries[0].isIntersecting);
+  }, { threshold: 0.15 });
+  ctaObserver.observe(formSection);
+}
+</script>
 
 </body>
 </html>
