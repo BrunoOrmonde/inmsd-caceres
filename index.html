@@ -5,1116 +5,744 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>INMSD – Índice de Maturidade em Saúde Digital | Cáceres – MT</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;500;600&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --green: #0F6E56;
-    --green-light: #E1F5EE;
-    --green-mid: #1D9E75;
-    --green-dark: #085041;
-    --text: #1a1a1a;
-    --text-muted: #555;
-    --text-hint: #888;
-    --border: #d8d8d8;
-    --bg: #f7f7f5;
-    --white: #ffffff;
-    --radius: 10px;
-    --radius-lg: 16px;
-  }
+:root {
+  --ink:        #0f1a14;
+  --ink-mid:    #2d3d34;
+  --ink-soft:   #5a6b5f;
+  --ink-hint:   #8fa095;
+  --green:      #0d5c3e;
+  --green-mid:  #1a7a52;
+  --green-acc:  #2fa86e;
+  --green-pale: #e8f5ee;
+  --green-rule: #c2ddd0;
+  --cream:      #f9f7f2;
+  --white:      #ffffff;
+  --rule:       #d6d0c4;
+  --serif:      'Playfair Display', Georgia, serif;
+  --sans:       'Source Sans 3', sans-serif;
+  --body:       'Source Serif 4', Georgia, serif;
+}
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 15px;
-    line-height: 1.6;
-    min-height: 100vh;
-  }
+html { scroll-behavior: smooth; }
 
-  /* HEADER */
-  .site-header {
-    background: var(--green-dark);
-    padding: 2.5rem 1.5rem 2rem;
-    text-align: center;
-  }
-  .site-header .tag {
-    display: inline-block;
-    background: rgba(255,255,255,0.15);
-    color: #9FE1CB;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 4px 12px;
-    border-radius: 20px;
-    margin-bottom: 14px;
-  }
-  .site-header h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(1.5rem, 4vw, 2.2rem);
-    color: #ffffff;
-    font-weight: 400;
-    line-height: 1.2;
-    margin-bottom: 8px;
-  }
-  .site-header p {
-    color: #9FE1CB;
-    font-size: 13px;
-    font-weight: 300;
-  }
+body {
+  font-family: var(--sans);
+  background: var(--cream);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
 
-  /* PROGRESS */
-  .progress-bar-wrap {
-    background: var(--green-dark);
-    padding: 0 1.5rem 1.5rem;
-  }
-  .progress-track {
-    background: rgba(255,255,255,0.15);
-    border-radius: 4px;
-    height: 4px;
-    overflow: hidden;
-    max-width: 720px;
-    margin: 0 auto;
-  }
-  .progress-fill {
-    background: #5DCAA5;
-    height: 100%;
-    width: 0%;
-    transition: width 0.4s ease;
-    border-radius: 4px;
-  }
-  .progress-label {
-    text-align: center;
-    font-size: 12px;
-    color: #9FE1CB;
-    margin-top: 6px;
-    font-weight: 300;
-  }
+/* ─── HEADER ─── */
+.site-header {
+  background: var(--white);
+  border-bottom: 1px solid var(--rule);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0 2.5rem;
+}
+.header-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  gap: 2rem;
+}
+.header-logos {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.header-logos img {
+  height: 34px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(15%);
+  opacity: 0.9;
+}
+.header-logos .sep {
+  width: 1px;
+  height: 28px;
+  background: var(--rule);
+}
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.header-nav a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 4px;
+  transition: all 0.15s;
+  letter-spacing: 0.01em;
+}
+.header-nav a:hover { background: var(--green-pale); color: var(--green); }
+.header-nav .cta {
+  background: var(--green);
+  color: var(--white) !important;
+  padding: 7px 18px;
+  border-radius: 4px;
+}
+.header-nav .cta:hover { background: var(--green-mid) !important; }
 
-  /* MAIN CONTAINER */
-  main {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 2rem 1.25rem 4rem;
-  }
+/* ─── HERO ─── */
+.hero {
+  background: var(--green);
+  position: relative;
+  overflow: hidden;
+  padding: 5rem 2.5rem 4.5rem;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 110% 40%, rgba(47,168,110,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 80% at -10% 80%, rgba(0,0,0,0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 4rem;
+  align-items: center;
+}
+.hero-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #7dd4a8;
+  margin-bottom: 1.25rem;
+}
+.hero-label::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: #7dd4a8;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.18;
+  margin-bottom: 0.5rem;
+}
+.hero h1 em {
+  font-style: italic;
+  color: #a8e6c5;
+}
+.hero-subtitle {
+  font-family: var(--body);
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.72);
+  font-weight: 300;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  max-width: 560px;
+}
+.hero-meta {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.hero-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.hero-meta-item .val {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  color: var(--white);
+  font-weight: 400;
+  line-height: 1;
+}
+.hero-meta-item .lbl {
+  font-size: 11px;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.hero-card {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 12px;
+  padding: 1.75rem;
+  backdrop-filter: blur(8px);
+}
+.hero-card-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #7dd4a8;
+  margin-bottom: 1.25rem;
+}
+.dimension {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.dimension:last-child { border-bottom: none; }
+.dim-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #2fa86e;
+  flex-shrink: 0;
+}
+.dim-text {
+  font-size: 13px;
+  color: rgba(255,255,255,0.78);
+  font-weight: 300;
+}
 
-  /* INTRO CARD */
-  .intro-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    border-left: 4px solid var(--green-mid);
-  }
-  .intro-card p {
-    font-size: 13.5px;
-    color: var(--text-muted);
-    line-height: 1.7;
-  }
-  .intro-card strong { color: var(--text); font-weight: 500; }
+/* ─── SECTION LAYOUT ─── */
+section { padding: 4rem 2.5rem; }
+.section-inner { max-width: 1120px; margin: 0 auto; }
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green-acc);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-label::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  background: var(--green-acc);
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+}
+.section-body {
+  font-family: var(--body);
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  font-weight: 300;
+  line-height: 1.75;
+  max-width: 680px;
+}
 
-  /* IDENTIFICATION SECTION */
-  .id-section {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-  }
-  .id-section h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.1rem;
-    font-weight: 400;
-    color: var(--green-dark);
-    margin-bottom: 1.25rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--border);
-  }
-  .field-group {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    margin-bottom: 14px;
-  }
-  .field-group.full { grid-template-columns: 1fr; }
-  .field {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-  .field label {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  .field label span.req { color: #D85A30; }
-  .field input, .field select, .field textarea {
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 9px 12px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    color: var(--text);
-    background: var(--white);
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .field input:focus, .field select:focus, .field textarea:focus {
-    border-color: var(--green-mid);
-  }
-  .field textarea { resize: vertical; min-height: 60px; }
-  .field select { cursor: pointer; }
+/* ─── SOBRE ─── */
+#sobre { background: var(--white); border-bottom: 1px solid var(--rule); }
+.sobre-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+  margin-top: 3rem;
+}
+.sobre-text p {
+  font-family: var(--body);
+  font-size: 1rem;
+  color: var(--ink-soft);
+  font-weight: 300;
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+}
+.sobre-text p:last-child { margin-bottom: 0; }
+.sobre-text strong { color: var(--ink); font-weight: 500; }
 
-  /* BLOCK */
-  .block {
-    margin-bottom: 2rem;
-  }
-  .block-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 1.25rem;
-    padding: 1rem 1.25rem;
-    background: var(--green-dark);
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  }
-  .block-num {
-    font-size: 11px;
-    font-weight: 500;
-    color: #5DCAA5;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-  .block-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1rem;
-    color: #ffffff;
-    font-weight: 400;
-  }
+.objectives { list-style: none; }
+.objectives li {
+  display: flex;
+  gap: 14px;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.objectives li:first-child { border-top: 1px solid var(--rule); }
+.obj-num {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  color: var(--green-rule);
+  font-weight: 400;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+  width: 28px;
+}
+.obj-text {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  font-family: var(--body);
+  font-weight: 300;
+}
+.obj-text strong { color: var(--ink); font-weight: 500; }
 
-  /* QUESTION CARD */
-  .q-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-top: none;
-    padding: 1.25rem 1.5rem;
-  }
-  .q-card:last-child {
-    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-  }
-  .q-card + .q-card {
-    border-top: 1px solid var(--border);
-  }
-  .q-num {
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--green-mid);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-  .q-text {
-    font-size: 14px;
-    color: var(--text);
-    line-height: 1.65;
-    margin-bottom: 1rem;
-    font-weight: 500;
-  }
-  .q-text em {
-    font-style: normal;
-    font-weight: 300;
-    color: var(--text-muted);
-    font-size: 13px;
-    display: block;
-    margin-top: 4px;
-  }
+/* ─── BLOCOS ─── */
+#blocos { background: var(--cream); }
+.blocos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 3rem;
+}
+.bloco-card {
+  background: var(--white);
+  padding: 1.5rem;
+  transition: background 0.15s;
+}
+.bloco-card:hover { background: var(--green-pale); }
+.bloco-num {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green-acc);
+  margin-bottom: 0.5rem;
+}
+.bloco-title {
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+.bloco-qs {
+  font-size: 12px;
+  color: var(--ink-hint);
+}
 
-  /* OPTIONS */
-  .options { display: flex; flex-direction: column; gap: 7px; }
-  .option {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 9px 12px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-  .option:hover { border-color: var(--green-mid); background: var(--green-light); }
-  .option input[type="radio"] { display: none; }
-  .option-dot {
-    width: 17px;
-    height: 17px;
-    border: 1.5px solid var(--border);
-    border-radius: 50%;
-    flex-shrink: 0;
-    margin-top: 1px;
-    transition: all 0.15s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .option-dot::after {
-    content: '';
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--green-mid);
-    opacity: 0;
-    transition: opacity 0.15s;
-  }
-  .option.selected {
-    border-color: var(--green-mid);
-    background: var(--green-light);
-  }
-  .option.selected .option-dot {
-    border-color: var(--green-mid);
-  }
-  .option.selected .option-dot::after { opacity: 1; }
-  .option-label { font-size: 13.5px; color: var(--text); line-height: 1.5; }
+/* ─── MATURIDADE ─── */
+#maturidade { background: var(--white); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.levels-track {
+  display: flex;
+  gap: 0;
+  margin-top: 3rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.level {
+  flex: 1;
+  padding: 1.25rem 1rem;
+  border-right: 1px solid var(--rule);
+  position: relative;
+}
+.level:last-child { border-right: none; }
+.level-bar {
+  height: 3px;
+  border-radius: 2px;
+  margin-bottom: 0.75rem;
+}
+.level:nth-child(1) .level-bar { background: #d1d5db; width: 25%; }
+.level:nth-child(2) .level-bar { background: #86efac; width: 50%; }
+.level:nth-child(3) .level-bar { background: #22c55e; width: 75%; }
+.level:nth-child(4) .level-bar { background: var(--green); width: 100%; }
+.level-num {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-hint);
+  margin-bottom: 4px;
+}
+.level-name {
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  color: var(--ink);
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+.level-desc {
+  font-size: 12px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  font-family: var(--body);
+  font-weight: 300;
+}
 
-  /* VALIDATION STATE */
-  .q-card.has-error .options { }
-  .q-card.has-error .q-num::after {
-    content: ' — resposta obrigatória';
-    color: #D85A30;
-    font-size: 11px;
-  }
+/* ─── FORMULÁRIO ─── */
+#formulario { background: var(--cream); }
+.form-wrapper {
+  margin-top: 3rem;
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.form-topbar {
+  background: var(--green);
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.form-topbar-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.03em;
+}
+.form-topbar-badge {
+  font-size: 11px;
+  color: #7dd4a8;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.form-embed {
+  width: 100%;
+  min-height: 820px;
+  border: none;
+  display: block;
+}
 
-  /* SUBMIT */
-  .submit-area {
-    margin-top: 2.5rem;
-    text-align: center;
-  }
-  .btn-submit {
-    background: var(--green);
-    color: white;
-    border: none;
-    border-radius: var(--radius);
-    padding: 14px 48px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.1s;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .btn-submit:hover { background: var(--green-dark); }
-  .btn-submit:active { transform: scale(0.98); }
-  .btn-submit:disabled { background: #aaa; cursor: not-allowed; }
-  .submit-note {
-    font-size: 12px;
-    color: var(--text-hint);
-    margin-top: 10px;
-  }
+/* ─── FOOTER ─── */
+footer {
+  background: var(--ink);
+  padding: 3rem 2.5rem;
+}
+.footer-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3rem;
+  align-items: start;
+}
+.footer-brand {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  color: var(--white);
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+.footer-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  font-weight: 300;
+  line-height: 1.6;
+}
+.footer-logos {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+.footer-logos img {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.4;
+}
+.footer-rule {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  max-width: 1120px;
+  margin: 2rem auto 0;
+}
+.footer-copy {
+  max-width: 1120px;
+  margin: 1rem auto 0;
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+}
 
-  /* SUCCESS */
-  #success-screen {
-    display: none;
-    max-width: 520px;
-    margin: 4rem auto;
-    text-align: center;
-    padding: 2rem;
-  }
-  .success-icon {
-    width: 64px;
-    height: 64px;
-    background: var(--green-light);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.5rem;
-    font-size: 28px;
-  }
-  #success-screen h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.6rem;
-    font-weight: 400;
-    color: var(--green-dark);
-    margin-bottom: 0.75rem;
-  }
-  #success-screen p {
-    color: var(--text-muted);
-    font-size: 14px;
-    line-height: 1.7;
-  }
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-inner > * { animation: fadeUp 0.6s ease both; }
+.hero-inner > *:nth-child(1) { animation-delay: 0.05s; }
+.hero-inner > *:nth-child(2) { animation-delay: 0.2s; }
 
-  /* ERROR BANNER */
-  #error-banner {
-    display: none;
-    background: #FCEBEB;
-    border: 1px solid #F09595;
-    border-radius: var(--radius);
-    padding: 12px 16px;
-    font-size: 13px;
-    color: #A32D2D;
-    margin-bottom: 1.5rem;
-    text-align: center;
-  }
-
-  @media(max-width: 540px) {
-    .field-group { grid-template-columns: 1fr; }
-  }
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-card { display: none; }
+  .sobre-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .levels-track { flex-direction: column; }
+  .level { border-right: none; border-bottom: 1px solid var(--rule); }
+  .level:last-child { border-bottom: none; }
+  .footer-inner { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .site-header { padding: 0 1.25rem; }
+  .header-nav a:not(.cta) { display: none; }
+  .hero { padding: 3.5rem 1.25rem 3rem; }
+  section { padding: 3rem 1.25rem; }
+  footer { padding: 2.5rem 1.25rem; }
+}
 </style>
 </head>
 <body>
 
+<!-- ─── HEADER ─── -->
 <header class="site-header">
-  <div class="tag">Município de Cáceres – MT</div>
-  <h1>INMSD — Índice de Maturidade em Saúde Digital</h1>
-  <p>Formulário para unidades de saúde vinculadas à Secretaria Municipal de Saúde</p>
+  <div class="header-inner">
+    <div class="header-logos">
+      <img src="https://www.telessaude.uerj.br/site/wp-content/uploads/sites/4/2025/09/PET_HORZINTALCOR-1024x284.png" alt="PET Telessaúde UERJ">
+      <div class="sep"></div>
+      <img src="https://unemat.br/assets/img/Logo_Unemat.svg" alt="UNEMAT">
+      <div class="sep"></div>
+      <img src="https://www.gov.br/transferegov/pt-br/noticias/noticias/arquivos-e-imagens/ministerio-da-saude.png/@@images/image-1200-df740c5814411903e4c0ad9a432f745a.png" alt="Ministério da Saúde">
+    </div>
+    <nav class="header-nav">
+      <a href="#sobre">Sobre</a>
+      <a href="#blocos">Dimensões</a>
+      <a href="#maturidade">Níveis</a>
+      <a href="#formulario" class="cta">Responder</a>
+    </nav>
+  </div>
 </header>
 
-<div class="progress-bar-wrap">
-  <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
-  <p class="progress-label" id="progress-label">0 de 35 perguntas respondidas</p>
-</div>
-
-<main id="form-area">
-
-  <div class="intro-card">
-    <p>Este formulário deve ser respondido pelo <strong>gestor ou responsável técnico da unidade</strong>. Todas as perguntas se referem à <strong>sua unidade de saúde</strong> (UBS, UPA, ambulatório, hospital municipal, etc.). Selecione a alternativa que melhor descreve a situação atual.</p>
-  </div>
-
-  <div id="error-banner">Não foi possível enviar as respostas. Verifique sua conexão e tente novamente.</div>
-
-  <!-- IDENTIFICAÇÃO -->
-  <div class="id-section">
-    <h2>Identificação da unidade</h2>
-    <div class="field-group">
-      <div class="field">
-        <label>Nome da unidade <span class="req">*</span></label>
-        <input type="text" id="id_unidade" placeholder="Ex: UBS Centro, UPA Norte..." required>
-      </div>
-      <div class="field">
-        <label>Tipo da unidade <span class="req">*</span></label>
-        <select id="id_tipo">
-          <option value="">Selecione...</option>
-          <option>UBS – Unidade Básica de Saúde</option>
-          <option>UPA – Unidade de Pronto Atendimento</option>
-          <option>Hospital Municipal</option>
-          <option>Ambulatório Especializado</option>
-          <option>Centro de Atenção Psicossocial (CAPS)</option>
-          <option>CEO – Centro de Especialidades Odontológicas</option>
-          <option>Outro</option>
-        </select>
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-label">Pesquisa científica · Cáceres – MT</div>
+      <h1>Índice de Maturidade em<br><em>Saúde Digital</em></h1>
+      <p class="hero-subtitle">Instrumento de avaliação diagnóstica aplicado às unidades de saúde do município de Cáceres, vinculadas à Secretaria Municipal de Saúde, para mensurar o grau de incorporação das tecnologias digitais na atenção à saúde.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span class="val">7</span>
+          <span class="lbl">Dimensões</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="val">35</span>
+          <span class="lbl">Indicadores</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="val">4</span>
+          <span class="lbl">Níveis de maturidade</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="val">2026</span>
+          <span class="lbl">Edição</span>
+        </div>
       </div>
     </div>
-    <div class="field-group">
-      <div class="field">
-        <label>Nome do responsável <span class="req">*</span></label>
-        <input type="text" id="id_responsavel" placeholder="Nome completo">
-      </div>
-      <div class="field">
-        <label>Cargo / função <span class="req">*</span></label>
-        <input type="text" id="id_cargo" placeholder="Ex: Coordenador, Diretor...">
-      </div>
-    </div>
-    <div class="field-group">
-      <div class="field">
-        <label>E-mail de contato</label>
-        <input type="email" id="id_email" placeholder="email@saude.caceres.mt.gov.br">
-      </div>
-      <div class="field">
-        <label>Data de preenchimento <span class="req">*</span></label>
-        <input type="date" id="id_data">
-      </div>
+    <div class="hero-card">
+      <div class="hero-card-title">Dimensões avaliadas</div>
+      <div class="dimension"><div class="dim-dot"></div><div class="dim-text">Gestão e Governança em Saúde Digital</div></div>
+      <div class="dimension"><div class="dim-dot"></div><div class="dim-text">Formação e Desenvolvimento Profissional</div></div>
+      <div class="dimension"><div class="dim-dot"></div><div class="dim-text">Sistemas e Plataformas de Interoperabilidade</div></div>
+      <div class="dimension"><div class="dim-dot"></div><div class="dim-text">Telessaúde e Serviços Digitais</div></div>
+      <div class="dimension"><div class="dim-dot"></div><div class="dim-text">Infoestrutura</div></div>
+      <div class="dimension"><div class="dim-dot"></div><div class="dim-text">Monitoramento e Avaliação</div></div>
+      <div class="dimension"><div class="dim-dot"></div><div class="dim-text">Infraestrutura e Segurança</div></div>
     </div>
   </div>
+</section>
 
-  <!-- BLOCO 1 -->
-  <div class="block">
-    <div class="block-header">
-      <span class="block-num">Bloco 1</span>
-      <span class="block-title">Gestão e Governança em Saúde Digital</span>
-    </div>
-
-    <div class="q-card" data-q="q1_1">
-      <div class="q-num">1.1 — Liderança e Articulação</div>
-      <div class="q-text">Esta unidade possui profissionais responsáveis e com atribuições formalmente definidas para planejar, executar projetos e garantir o suporte técnico diário dos sistemas de Saúde Digital utilizados aqui?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q1_1" value="1"><span class="option-dot"></span><span class="option-label">Não há nenhum profissional com responsabilidade formal nem recursos suficientes para planejar, executar e garantir o suporte técnico de Saúde Digital nesta unidade.</span></label>
-        <label class="option"><input type="radio" name="q1_1" value="2"><span class="option-dot"></span><span class="option-label">Há profissionais que conseguem executar tarefas de Saúde Digital, mas as decisões sobre prioridades não seguem um processo formal — dependem de uma ou poucas pessoas, sem respaldo institucional.</span></label>
-        <label class="option"><input type="radio" name="q1_1" value="3"><span class="option-dot"></span><span class="option-label">Esta unidade possui tanto profissionais que executam os sistemas quanto um responsável formal por decidir as prioridades, mas as funções estão misturadas e não está claro quem define a estratégia e quem executa.</span></label>
-        <label class="option"><input type="radio" name="q1_1" value="4"><span class="option-dot"></span><span class="option-label">Esta unidade possui profissionais executores e um responsável formal pelas prioridades, com funções totalmente definidas e claras, garantindo boa execução e direção estratégica da Saúde Digital.</span></label>
-        <label class="option"><input type="radio" name="q1_1" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
+<!-- ─── SOBRE ─── -->
+<section id="sobre">
+  <div class="section-inner">
+    <div class="section-label">Contexto da pesquisa</div>
+    <h2 class="section-title">Sobre o INMSD</h2>
+    <div class="sobre-grid">
+      <div class="sobre-text">
+        <p>O <strong>Índice de Maturidade em Saúde Digital (INMSD)</strong> é um instrumento de avaliação diagnóstica desenvolvido para mensurar o grau de incorporação e uso das tecnologias digitais nos serviços de saúde.</p>
+        <p>Nesta edição, o INMSD é aplicado de forma inédita no nível das <strong>unidades de saúde</strong> do município de Cáceres – MT, permitindo um mapeamento granular da realidade digital de cada estabelecimento vinculado à Secretaria Municipal de Saúde.</p>
+        <p>Os resultados subsidiarão o planejamento estratégico municipal, orientarão investimentos em tecnologia e saúde digital, e contribuirão para a produção de conhecimento científico sobre a maturidade digital no SUS.</p>
+        <p>Esta pesquisa é conduzida em parceria entre o <strong>PET Telessaúde UERJ</strong> e a <strong>Universidade do Estado de Mato Grosso (UNEMAT)</strong>, com apoio da Secretaria Municipal de Saúde de Cáceres.</p>
       </div>
-    </div>
-
-    <div class="q-card" data-q="q1_2">
-      <div class="q-num">1.2 — Privacidade e Confidencialidade</div>
-      <div class="q-text">Esta unidade segue regras, normas ou orientações oficiais que definem claramente como garantir a privacidade do paciente (uso correto dos dados) e a confidencialidade (proteção e segurança dos dados) em todos os sistemas de Saúde Digital utilizados aqui?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q1_2" value="1"><span class="option-dot"></span><span class="option-label">Não há mecanismos de preservação da privacidade e confidencialidade adotados nem divulgados nesta unidade.</span></label>
-        <label class="option"><input type="radio" name="q1_2" value="2"><span class="option-dot"></span><span class="option-label">Há mecanismos adotados nesta unidade, mas não são divulgados aos profissionais.</span></label>
-        <label class="option"><input type="radio" name="q1_2" value="3"><span class="option-dot"></span><span class="option-label">Há mecanismos adotados e divulgados, mas sem treinamento e/ou uso efetivo pelos profissionais.</span></label>
-        <label class="option"><input type="radio" name="q1_2" value="4"><span class="option-dot"></span><span class="option-label">Há mecanismos adotados e divulgados, com treinamento e uso efetivo pelos profissionais.</span></label>
-        <label class="option"><input type="radio" name="q1_2" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-
-    <div class="q-card" data-q="q1_3">
-      <div class="q-num">1.3 — Financiamento</div>
-      <div class="q-text">As ações e serviços de Saúde Digital desta unidade estão contempladas no planejamento da Secretaria Municipal de Saúde e possuem recursos orçamentários destinados para isso?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q1_3" value="1"><span class="option-dot"></span><span class="option-label">Não há orçamento destinado a ações/serviços de saúde digital e não há planejamento para isso.</span></label>
-        <label class="option"><input type="radio" name="q1_3" value="2"><span class="option-dot"></span><span class="option-label">Não há orçamento próprio, mas há planejamento para inclusão futura.</span></label>
-        <label class="option"><input type="radio" name="q1_3" value="3"><span class="option-dot"></span><span class="option-label">Há recursos destinados, mas não são suficientes para as necessidades.</span></label>
-        <label class="option"><input type="radio" name="q1_3" value="4"><span class="option-dot"></span><span class="option-label">Há recursos destinados e suficientes para as ações/serviços de saúde digital desta unidade.</span></label>
-        <label class="option"><input type="radio" name="q1_3" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-
-    <div class="q-card" data-q="q1_4">
-      <div class="q-num">1.4 — Política</div>
-      <div class="q-text">Esta unidade possui ou segue um plano de ação formal com projetos voltados a melhorar os serviços de saúde por meio da tecnologia digital — e não apenas substituir o papel pelo computador? <em>(Ex: implantação de Prontuário Eletrônico, Telemedicina, etc.)</em></div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q1_4" value="1"><span class="option-dot"></span><span class="option-label">Não há plano de ação formal nem projetos de saúde digital em funcionamento nesta unidade.</span></label>
-        <label class="option"><input type="radio" name="q1_4" value="2"><span class="option-dot"></span><span class="option-label">Não há plano formal, mas existem iniciativas menores e isoladas de saúde digital nesta unidade.</span></label>
-        <label class="option"><input type="radio" name="q1_4" value="3"><span class="option-dot"></span><span class="option-label">Não há plano formal, mas há projetos avançados de saúde digital em execução nesta unidade.</span></label>
-        <label class="option"><input type="radio" name="q1_4" value="4"><span class="option-dot"></span><span class="option-label">Esta unidade segue um plano de ação formal de saúde digital definido pela Secretaria ou pela própria unidade.</span></label>
-        <label class="option"><input type="radio" name="q1_4" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-
-    <div class="q-card" data-q="q1_5">
-      <div class="q-num">1.5 — Planejamento</div>
-      <div class="q-text">Esta unidade utiliza ou segue algum documento de planejamento formal de TIC (como PDTI) que inclua explicitamente metas e projetos de Saúde Digital (prontuário eletrônico, telemedicina, digitalização)?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q1_5" value="1"><span class="option-dot"></span><span class="option-label">Não existe nenhum plano de tecnologia formal e não há previsão de quando será criado.</span></label>
-        <label class="option"><input type="radio" name="q1_5" value="2"><span class="option-dot"></span><span class="option-label">O plano ainda não foi criado ou aprovado, mas já há cronograma oficial e trabalho ativo para desenvolvê-lo.</span></label>
-        <label class="option"><input type="radio" name="q1_5" value="3"><span class="option-dot"></span><span class="option-label">Existe um plano aprovado, mas não inclui metas, projetos ou recursos específicos para a Saúde Digital.</span></label>
-        <label class="option"><input type="radio" name="q1_5" value="4"><span class="option-dot"></span><span class="option-label">Existe um plano aprovado que inclui e prioriza a Saúde Digital, com metas e recursos definidos.</span></label>
-        <label class="option"><input type="radio" name="q1_5" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
+      <div>
+        <div class="section-label" style="margin-bottom:1rem;">Objetivos</div>
+        <ol class="objectives">
+          <li>
+            <span class="obj-num">01</span>
+            <span class="obj-text"><strong>Diagnosticar</strong> o estágio atual de adoção das tecnologias digitais nas unidades de saúde de Cáceres.</span>
+          </li>
+          <li>
+            <span class="obj-num">02</span>
+            <span class="obj-text"><strong>Identificar</strong> lacunas e potencialidades na infraestrutura, governança e uso de sistemas de informação em saúde.</span>
+          </li>
+          <li>
+            <span class="obj-num">03</span>
+            <span class="obj-text"><strong>Produzir evidências</strong> científicas sobre maturidade digital no contexto do SUS municipal.</span>
+          </li>
+          <li>
+            <span class="obj-num">04</span>
+            <span class="obj-text"><strong>Subsidiar</strong> o planejamento estratégico e a tomada de decisão em saúde digital no município.</span>
+          </li>
+        </ol>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- BLOCO 2 -->
-  <div class="block">
-    <div class="block-header">
-      <span class="block-num">Bloco 2</span>
-      <span class="block-title">Formação e Desenvolvimento Profissional</span>
-    </div>
-
-    <div class="q-card" data-q="q2_1">
-      <div class="q-num">2.1 — Parceria com Instituições de Ensino e Pesquisa</div>
-      <div class="q-text">Esta unidade mantém alguma colaboração com instituições de ensino e pesquisa na área de saúde digital?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q2_1" value="1"><span class="option-dot"></span><span class="option-label">Não existe nenhuma colaboração com instituições de ensino e pesquisa na área de saúde digital.</span></label>
-        <label class="option"><input type="radio" name="q2_1" value="2"><span class="option-dot"></span><span class="option-label">Existe colaboração pontual e não formalizada (ex: eventos, workshops ou pesquisas específicas).</span></label>
-        <label class="option"><input type="radio" name="q2_1" value="3"><span class="option-dot"></span><span class="option-label">Existe colaboração regular, mas não formalizada (ex: cursos ou pesquisas que se estendem por vários períodos).</span></label>
-        <label class="option"><input type="radio" name="q2_1" value="4"><span class="option-dot"></span><span class="option-label">Existe colaboração regular e formalizada com documentos oficiais (ex: termos de cooperação ou convênios).</span></label>
-        <label class="option"><input type="radio" name="q2_1" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
+<!-- ─── BLOCOS ─── -->
+<section id="blocos">
+  <div class="section-inner">
+    <div class="section-label">Estrutura do instrumento</div>
+    <h2 class="section-title">Dimensões avaliadas</h2>
+    <p class="section-body">O instrumento está organizado em 7 dimensões temáticas, cada uma composta por indicadores com 4 níveis de maturidade progressiva.</p>
+    <div class="blocos-grid">
+      <div class="bloco-card">
+        <div class="bloco-num">Bloco 1</div>
+        <div class="bloco-title">Gestão e Governança em Saúde Digital</div>
+        <div class="bloco-qs">5 indicadores · Liderança, privacidade, financiamento, política e planejamento</div>
       </div>
-    </div>
-
-    <div class="q-card" data-q="q2_2">
-      <div class="q-num">2.2 — Formação Contínua em Saúde Digital</div>
-      <div class="q-text">Esta unidade oferece ou garante que seus profissionais participem, de forma organizada e contínua, de cursos ou treinamentos para usar as ferramentas digitais disponíveis?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q2_2" value="1"><span class="option-dot"></span><span class="option-label">Não há nenhum esforço formal de capacitação em tecnologias de saúde. O aprendizado fica por conta de cada profissional.</span></label>
-        <label class="option"><input type="radio" name="q2_2" value="2"><span class="option-dot"></span><span class="option-label">Há treinamentos pontuais conforme surgem necessidades, sem regularidade nem estruturação.</span></label>
-        <label class="option"><input type="radio" name="q2_2" value="3"><span class="option-dot"></span><span class="option-label">O treinamento ocorre com alguma periodicidade, mas a qualidade e conteúdo são inconsistentes, sem currículo formal.</span></label>
-        <label class="option"><input type="radio" name="q2_2" value="4"><span class="option-dot"></span><span class="option-label">Há um Plano de Capacitação com orçamento e regularidade, que desenvolve e mantém as competências digitais dos profissionais.</span></label>
-        <label class="option"><input type="radio" name="q2_2" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
+      <div class="bloco-card">
+        <div class="bloco-num">Bloco 2</div>
+        <div class="bloco-title">Formação e Desenvolvimento Profissional</div>
+        <div class="bloco-qs">4 indicadores · Parcerias, capacitação contínua, interdisciplinaridade e equipe TIC</div>
       </div>
-    </div>
-
-    <div class="q-card" data-q="q2_3">
-      <div class="q-num">2.3 — Interdisciplinaridade e Abrangência na Formação</div>
-      <div class="q-text">Os treinamentos de tecnologia realizados pelos profissionais desta unidade capacitam a equipe para usar a tecnologia de forma integrada no cuidado ao paciente? Esses cursos alcançam todas as categorias profissionais?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q2_3" value="1"><span class="option-dot"></span><span class="option-label">Não há cursos, oficinas ou nenhum tipo de formação em Saúde Digital para os profissionais desta unidade.</span></label>
-        <label class="option"><input type="radio" name="q2_3" value="2"><span class="option-dot"></span><span class="option-label">Os treinamentos não garantem o uso integrado da tecnologia no cuidado e são limitados a algumas categorias profissionais.</span></label>
-        <label class="option"><input type="radio" name="q2_3" value="3"><span class="option-dot"></span><span class="option-label">A formação atende apenas uma das condições: ou capacita para uso integrado mas abrange poucos profissionais, ou é para todos mas o conteúdo é superficial.</span></label>
-        <label class="option"><input type="radio" name="q2_3" value="4"><span class="option-dot"></span><span class="option-label">Os treinamentos garantem o uso integrado da tecnologia no cuidado e são oferecidos para todas as categorias profissionais.</span></label>
-        <label class="option"><input type="radio" name="q2_3" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
+      <div class="bloco-card">
+        <div class="bloco-num">Bloco 3</div>
+        <div class="bloco-title">Sistemas e Plataformas de Interoperabilidade</div>
+        <div class="bloco-qs">5 indicadores · Prontuário eletrônico, sistemas nacionais, RNDS e governança de dados</div>
       </div>
-    </div>
-
-    <div class="q-card" data-q="q2_4">
-      <div class="q-num">2.4 — Equipe de TIC e Saúde Digital</div>
-      <div class="q-text">Esta unidade conta com apoio técnico de informática suficiente para manter os sistemas funcionando, e esses profissionais entendem como a tecnologia se aplica à realidade de uma unidade de saúde?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q2_4" value="1"><span class="option-dot"></span><span class="option-label">O suporte técnico de TI é insuficiente e os técnicos disponíveis não entendem como a informática se aplica ao contexto de saúde.</span></label>
-        <label class="option"><input type="radio" name="q2_4" value="2"><span class="option-dot"></span><span class="option-label">O suporte técnico de TI é insuficiente, mas alguns técnicos entendem como a informática se aplica à saúde.</span></label>
-        <label class="option"><input type="radio" name="q2_4" value="3"><span class="option-dot"></span><span class="option-label">O suporte técnico de TI é suficiente e alguns profissionais entendem como a informática se aplica à saúde.</span></label>
-        <label class="option"><input type="radio" name="q2_4" value="4"><span class="option-dot"></span><span class="option-label">O suporte é suficiente, multidisciplinar, com profissionais de TI e de saúde com formação em informática em saúde.</span></label>
-        <label class="option"><input type="radio" name="q2_4" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
+      <div class="bloco-card">
+        <div class="bloco-num">Bloco 4</div>
+        <div class="bloco-title">Telessaúde e Serviços Digitais</div>
+        <div class="bloco-qs">9 indicadores · Teleconsulta, telemonitoramento, videoconferência e plataformas</div>
+      </div>
+      <div class="bloco-card">
+        <div class="bloco-num">Bloco 5</div>
+        <div class="bloco-title">Infoestrutura</div>
+        <div class="bloco-qs">8 indicadores · Terminologias clínicas, acesso ao cidadão, comunicação e conhecimento</div>
+      </div>
+      <div class="bloco-card">
+        <div class="bloco-num">Bloco 6</div>
+        <div class="bloco-title">Monitoramento, Avaliação e Disseminação</div>
+        <div class="bloco-qs">6 indicadores · Indicadores de impacto, avaliação, investimentos e planejamento</div>
+      </div>
+      <div class="bloco-card">
+        <div class="bloco-num">Bloco 7</div>
+        <div class="bloco-title">Infraestrutura e Segurança</div>
+        <div class="bloco-qs">5 indicadores · Conectividade, segurança da informação, datacenter e arquitetura</div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- BLOCO 3 -->
-  <div class="block">
-    <div class="block-header">
-      <span class="block-num">Bloco 3</span>
-      <span class="block-title">Sistemas e Plataformas de Interoperabilidade</span>
-    </div>
-
-    <div class="q-card" data-q="q3_1">
-      <div class="q-num">3.1 — Registro Eletrônico em Saúde</div>
-      <div class="q-text">Esta unidade utiliza Prontuário Eletrônico do Paciente (PEP) em vez de papel? Quão completa é essa digitalização?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q3_1" value="1"><span class="option-dot"></span><span class="option-label">Esta unidade não utiliza Prontuário Eletrônico — toda a documentação é feita em papel.</span></label>
-        <label class="option"><input type="radio" name="q3_1" value="2"><span class="option-dot"></span><span class="option-label">Esta unidade utiliza algum tipo de Prontuário Eletrônico, mas a maior parte da documentação ainda é em papel.</span></label>
-        <label class="option"><input type="radio" name="q3_1" value="3"><span class="option-dot"></span><span class="option-label">Utiliza o Prontuário Eletrônico, mas o registro ainda é incompleto (digital + papel), exigindo consulta aos dois.</span></label>
-        <label class="option"><input type="radio" name="q3_1" value="4"><span class="option-dot"></span><span class="option-label">Utiliza o Prontuário Eletrônico e toda a documentação clínica do paciente está registrada digitalmente.</span></label>
-        <label class="option"><input type="radio" name="q3_1" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
+<!-- ─── NÍVEIS ─── -->
+<section id="maturidade">
+  <div class="section-inner">
+    <div class="section-label">Escala de avaliação</div>
+    <h2 class="section-title">Níveis de maturidade</h2>
+    <p class="section-body">Cada indicador é avaliado em uma escala de 4 níveis, que variam do estágio inicial — onde praticamente nenhuma ação foi implementada — até o estágio avançado, de excelência em saúde digital.</p>
+    <div class="levels-track">
+      <div class="level">
+        <div class="level-bar"></div>
+        <div class="level-num">Nível 1</div>
+        <div class="level-name">Incipiente</div>
+        <div class="level-desc">Ausência de estruturas, processos ou recursos formalizados. As ações dependem de iniciativas individuais e esporádicas.</div>
       </div>
-    </div>
-
-    <div class="q-card" data-q="q3_2">
-      <div class="q-num">3.2 — Sistemas Nacionais em Saúde</div>
-      <div class="q-text">Quando um atendimento é registrado nesta unidade, esse dado é enviado automaticamente para os sistemas do Ministério da Saúde, ou alguém ainda precisa digitar ou enviar esse dado manualmente?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q3_2" value="1"><span class="option-dot"></span><span class="option-label">O processo é manual e burocrático: os dados são coletados nesta unidade e enviados por outra área da Secretaria.</span></label>
-        <label class="option"><input type="radio" name="q3_2" value="2"><span class="option-dot"></span><span class="option-label">O processo é manual: esta própria unidade precisa digitar os dados nos sistemas do Ministério da Saúde separadamente.</span></label>
-        <label class="option"><input type="radio" name="q3_2" value="3"><span class="option-dot"></span><span class="option-label">O envio é feito em tempo real e de forma automatizada, mas apenas para alguns sistemas nacionais (ex: e-SUS APS ou vigilância).</span></label>
-        <label class="option"><input type="radio" name="q3_2" value="4"><span class="option-dot"></span><span class="option-label">O envio é feito em tempo real e de forma automatizada para a maioria ou todos os sistemas nacionais.</span></label>
-        <label class="option"><input type="radio" name="q3_2" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
+      <div class="level">
+        <div class="level-bar"></div>
+        <div class="level-num">Nível 2</div>
+        <div class="level-name">Em desenvolvimento</div>
+        <div class="level-desc">Existem iniciativas em curso, mas ainda sem sistematização, regularidade ou cobertura abrangente.</div>
       </div>
-    </div>
-
-    <div class="q-card" data-q="q3_3">
-      <div class="q-num">3.3 — Adoção à Interoperabilidade (RNDS)</div>
-      <div class="q-text">Esta unidade consegue compartilhar dados dos pacientes com outras unidades de saúde do país por meio da Rede Nacional de Dados em Saúde (RNDS), utilizando os modelos padronizados do Ministério da Saúde?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q3_3" value="1"><span class="option-dot"></span><span class="option-label">Esta unidade não está conectada à RNDS e não há suporte para se conectar.</span></label>
-        <label class="option"><input type="radio" name="q3_3" value="2"><span class="option-dot"></span><span class="option-label">Esta unidade não está conectada à RNDS, mas há suporte disponível para realizar a conexão.</span></label>
-        <label class="option"><input type="radio" name="q3_3" value="3"><span class="option-dot"></span><span class="option-label">Esta unidade está conectada à RNDS, mas utiliza apenas alguns modelos informacionais disponíveis.</span></label>
-        <label class="option"><input type="radio" name="q3_3" value="4"><span class="option-dot"></span><span class="option-label">Esta unidade está conectada à RNDS e utiliza a maioria dos modelos informacionais disponíveis.</span></label>
-        <label class="option"><input type="radio" name="q3_3" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
+      <div class="level">
+        <div class="level-bar"></div>
+        <div class="level-num">Nível 3</div>
+        <div class="level-name">Estabelecido</div>
+        <div class="level-desc">Processos formalizados e em operação regular, porém com lacunas em cobertura, qualidade ou integração estratégica.</div>
       </div>
-    </div>
-
-    <div class="q-card" data-q="q3_4">
-      <div class="q-num">3.4 — Gestão e Governança de Dados</div>
-      <div class="q-text">Esta unidade possui um processo organizado para corrigir erros nos dados dos sistemas e os profissionais são orientados regularmente sobre como evitar esses erros?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q3_4" value="1"><span class="option-dot"></span><span class="option-label">Não existe nenhum processo estabelecido para garantir a qualidade dos dados nesta unidade.</span></label>
-        <label class="option"><input type="radio" name="q3_4" value="2"><span class="option-dot"></span><span class="option-label">Há rotina para corrigir os dados, mas os profissionais não são informados nem treinados sobre como evitar os erros.</span></label>
-        <label class="option"><input type="radio" name="q3_4" value="3"><span class="option-dot"></span><span class="option-label">Há rotina de correção e os profissionais são informados/treinados, mas isso acontece apenas ocasionalmente.</span></label>
-        <label class="option"><input type="radio" name="q3_4" value="4"><span class="option-dot"></span><span class="option-label">Há rotina de correção e os profissionais são informados/treinados de forma rotineira para melhorar a qualidade do preenchimento.</span></label>
-        <label class="option"><input type="radio" name="q3_4" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-
-    <div class="q-card" data-q="q3_5">
-      <div class="q-num">3.5 — Governança dos Sistemas de Informação</div>
-      <div class="q-text">Esta unidade tem um responsável formal — internamente ou por apoio da Secretaria — para cuidar dos sistemas de saúde, seguindo regras e rotinas bem definidas para gerenciar a tecnologia?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q3_5" value="1"><span class="option-dot"></span><span class="option-label">Não existe estrutura formal para gestão e governança dos sistemas de informação nesta unidade.</span></label>
-        <label class="option"><input type="radio" name="q3_5" value="2"><span class="option-dot"></span><span class="option-label">Existe um responsável formal, mas não há regras ou rotina de trabalho definidas.</span></label>
-        <label class="option"><input type="radio" name="q3_5" value="3"><span class="option-dot"></span><span class="option-label">Existe um responsável formal com regras e rotina de trabalho, mas que ainda não cobrem toda a gestão de TI.</span></label>
-        <label class="option"><input type="radio" name="q3_5" value="4"><span class="option-dot"></span><span class="option-label">Existe um responsável formal com processos bem estabelecidos para gestão e governança dos sistemas.</span></label>
-        <label class="option"><input type="radio" name="q3_5" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
+      <div class="level">
+        <div class="level-bar"></div>
+        <div class="level-num">Nível 4</div>
+        <div class="level-name">Avançado</div>
+        <div class="level-desc">Estrutura consolidada, processos integrados, monitoramento contínuo e melhoria sistemática orientada por evidências.</div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- BLOCO 4 -->
-  <div class="block">
-    <div class="block-header">
-      <span class="block-num">Bloco 4</span>
-      <span class="block-title">Telessaúde e Serviços Digitais</span>
-    </div>
-
-    <div class="q-card" data-q="q4_1">
-      <div class="q-num">4.1 — Gestão de Serviços em Telessaúde</div>
-      <div class="q-text">Considerando as necessidades de saúde da população atendida por esta unidade, os serviços de telessaúde disponíveis aqui atendem às necessidades reais dos seus usuários? <em>(Ex: Teleconsultoria, Teletriagem, Teleconsulta, Telediagnóstico, Telemonitoramento, Teleorientação, SOF, Telerregulação.)</em></div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q4_1" value="1"><span class="option-dot"></span><span class="option-label">Esta unidade não tem necessidade de serviços de telessaúde.</span></label>
-        <label class="option"><input type="radio" name="q4_1" value="2"><span class="option-dot"></span><span class="option-label">A telessaúde existe, mas se limita a projetos-piloto ou ações esporádicas, sem organização formal.</span></label>
-        <label class="option"><input type="radio" name="q4_1" value="3"><span class="option-dot"></span><span class="option-label">A telessaúde está institucionalizada com rotinas de gestão definidas, mas falta controle de qualidade clínica e alinhamento regulatório.</span></label>
-        <label class="option"><input type="radio" name="q4_1" value="4"><span class="option-dot"></span><span class="option-label">A telessaúde é um serviço maduro, com normas clínicas e de qualidade e monitoramento contínuo de resultados.</span></label>
-        <label class="option"><input type="radio" name="q4_1" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
+<!-- ─── FORMULÁRIO ─── -->
+<section id="formulario">
+  <div class="section-inner">
+    <div class="section-label">Instrumento de coleta</div>
+    <h2 class="section-title">Responder ao questionário</h2>
+    <p class="section-body">O preenchimento deve ser realizado pelo gestor ou responsável técnico da unidade de saúde. Tempo estimado: 20 a 30 minutos.</p>
+    <div class="form-wrapper">
+      <div class="form-topbar">
+        <span class="form-topbar-title">INMSD 2026 — Unidades de Saúde · Cáceres – MT</span>
+        <span class="form-topbar-badge">Microsoft Forms</span>
       </div>
-    </div>
-
-    <div class="q-card" data-q="q4_2">
-      <div class="q-num">4.2 — Ferramentas de Monitoramento da Qualidade em Telessaúde</div>
-      <div class="q-text">Esta unidade possui ferramentas e rotinas para medir se os serviços de Telessaúde estão sendo seguros e eficazes? Essas ferramentas são utilizadas continuamente para melhorar o serviço?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q4_2" value="1"><span class="option-dot"></span><span class="option-label">Esta unidade não possui ferramentas nem rotina para monitorar a qualidade dos serviços de telessaúde.</span></label>
-        <label class="option"><input type="radio" name="q4_2" value="2"><span class="option-dot"></span><span class="option-label">Há regras e rotinas de trabalho para a qualidade, mas não há sistemas de TI para monitorar e medir.</span></label>
-        <label class="option"><input type="radio" name="q4_2" value="3"><span class="option-dot"></span><span class="option-label">Há métodos, processos e sistemas para a gestão da qualidade clínica em telessaúde, mas não são usados de forma contínua.</span></label>
-        <label class="option"><input type="radio" name="q4_2" value="4"><span class="option-dot"></span><span class="option-label">Há métodos, processos e sistemas para implementação e monitoramento contínuo da gestão da qualidade em telessaúde.</span></label>
-        <label class="option"><input type="radio" name="q4_2" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-
-    <div class="q-card" data-q="q4_3">
-      <div class="q-num">4.3 — Tempo de Oferta de Serviços de Telessaúde</div>
-      <div class="q-text">Há quanto tempo esta unidade oferece serviços de Telessaúde? É algo recente ou uma prática já consolidada?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q4_3" value="1"><span class="option-dot"></span><span class="option-label">A Telessaúde nunca foi implementada nesta unidade.</span></label>
-        <label class="option"><input type="radio" name="q4_3" value="2"><span class="option-dot"></span><span class="option-label">Esta unidade começou a oferecer serviços de Telessaúde recentemente.</span></label>
-        <label class="option"><input type="radio" name="q4_3" value="3"><span class="option-dot"></span><span class="option-label">O serviço já está em operação há um período razoável com certa estabilidade, mas ainda não atinge toda a sua potencialidade.</span></label>
-        <label class="option"><input type="radio" name="q4_3" value="4"><span class="option-dot"></span><span class="option-label">Esta unidade possui grande experiência na oferta de serviços de telessaúde.</span></label>
-        <label class="option"><input type="radio" name="q4_3" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-
-    <div class="q-card" data-q="q4_4">
-      <div class="q-num">4.4 — Estratégia de Apoio à Jornada do Paciente</div>
-      <div class="q-text">Esta unidade possui um processo que utiliza a Telessaúde para acompanhar o paciente desde o primeiro contato até o acompanhamento final? Há verificação de que esse processo está funcionando?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q4_4" value="1"><span class="option-dot"></span><span class="option-label">Esta unidade não possui nenhum processo de acompanhamento ao paciente via telessaúde.</span></label>
-        <label class="option"><input type="radio" name="q4_4" value="2"><span class="option-dot"></span><span class="option-label">Existe um processo de acompanhamento definido, mas não colocado em prática.</span></label>
-        <label class="option"><input type="radio" name="q4_4" value="3"><span class="option-dot"></span><span class="option-label">Existe uma estratégia de apoio definida e implementada, mas sem verificação da sua eficácia.</span></label>
-        <label class="option"><input type="radio" name="q4_4" value="4"><span class="option-dot"></span><span class="option-label">Existe uma estratégia definida, implementada e monitorada para melhoria contínua dos serviços.</span></label>
-        <label class="option"><input type="radio" name="q4_4" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-
-    <div class="q-card" data-q="q4_5">
-      <div class="q-num">4.5 — Integração da Telessaúde com Outros Serviços</div>
-      <div class="q-text">A Telessaúde é utilizada nesta unidade em diferentes etapas do atendimento? Quando o paciente usa um serviço à distância, ele se articula facilmente com o próximo passo do tratamento?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q4_5" value="1"><span class="option-dot"></span><span class="option-label">A Telessaúde não é utilizada com os pacientes desta unidade em nenhuma etapa.</span></label>
-        <label class="option"><input type="radio" name="q4_5" value="2"><span class="option-dot"></span><span class="option-label">A Telessaúde é utilizada em pontos específicos e não costuma ser combinada com outros serviços.</span></label>
-        <label class="option"><input type="radio" name="q4_5" value="3"><span class="option-dot"></span><span class="option-label">A Telessaúde é utilizada em pontos específicos e é combinada com outros serviços.</span></label>
-        <label class="option"><input type="radio" name="q4_5" value="4"><span class="option-dot"></span><span class="option-label">A Telessaúde é utilizada em grande parte das etapas e funciona de forma articulada com os demais serviços.</span></label>
-        <label class="option"><input type="radio" name="q4_5" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-
-    <div class="q-card" data-q="q4_6">
-      <div class="q-num">4.6 — Plataforma para Telessaúde</div>
-      <div class="q-text">O atendimento à distância oferecido nesta unidade é realizado por um sistema seguro? Os dados desses atendimentos são registrados no Prontuário Eletrônico do paciente?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q4_6" value="1"><span class="option-dot"></span><span class="option-label">Esta unidade não oferece telessaúde, não possui plataforma ou software e não realiza registro digital dos dados de cuidado.</span></label>
-        <label class="option"><input type="radio" name="q4_6" value="2"><span class="option-dot"></span><span class="option-label">Esta unidade oferece telessaúde, mas não possui plataforma adequada nem realiza registro digital dos dados.</span></label>
-        <label class="option"><input type="radio" name="q4_6" value="3"><span class="option-dot"></span><span class="option-label">Esta unidade possui plataforma para telessaúde, mas não realiza o registro dos dados no Prontuário Eletrônico.</span></label>
-        <label class="option"><input type="radio" name="q4_6" value="4"><span class="option-dot"></span><span class="option-label">Esta unidade possui plataforma para telessaúde e realiza o registro dos dados no Prontuário Eletrônico.</span></label>
-        <label class="option"><input type="radio" name="q4_6" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-
-    <div class="q-card" data-q="q4_7">
-      <div class="q-num">4.7 — Integração de Resultados de Exames</div>
-      <div class="q-text">Os resultados de laboratório, imagem ou outros diagnósticos aparecem automaticamente no Prontuário Eletrônico, ou o profissional precisa buscá-los em outro sistema ou em papel?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q4_7" value="1"><span class="option-dot"></span><span class="option-label">O profissional precisa buscar os resultados manualmente — eles não aparecem automaticamente no Prontuário.</span></label>
-        <label class="option"><input type="radio" name="q4_7" value="2"><span class="option-dot"></span><span class="option-label">Existe um plano de ação para automação do registro de resultados no Prontuário, mas ainda não foi implementado.</span></label>
-        <label class="option"><input type="radio" name="q4_7" value="3"><span class="option-dot"></span><span class="option-label">A integração automática dos resultados ao Prontuário está em processo de implementação.</span></label>
-        <label class="option"><input type="radio" name="q4_7" value="4"><span class="option-dot"></span><span class="option-label">Há sistemas e processos automáticos que registram os resultados de exames e diagnósticos no Prontuário Eletrônico.</span></label>
-        <label class="option"><input type="radio" name="q4_7" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-
-    <div class="q-card" data-q="q4_8">
-      <div class="q-num">4.8 — Videoconferência Síncrona</div>
-      <div class="q-text">Esta unidade dispõe de salas adequadas, equipamentos de vídeo/áudio e internet suficiente para realizar teleconsultas ou reuniões ao vivo com qualidade, sem interrupções?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q4_8" value="1"><span class="option-dot"></span><span class="option-label">Esta unidade não possui nenhum dos três itens necessários (sala, equipamentos e internet).</span></label>
-        <label class="option"><input type="radio" name="q4_8" value="2"><span class="option-dot"></span><span class="option-label">Há sala adequada, mas faltam equipamentos (câmeras, microfones) e internet/rede de dados.</span></label>
-        <label class="option"><input type="radio" name="q4_8" value="3"><span class="option-dot"></span><span class="option-label">Há sala e internet adequadas, mas ainda faltam os equipamentos específicos (câmeras e microfones).</span></label>
-        <label class="option"><input type="radio" name="q4_8" value="4"><span class="option-dot"></span><span class="option-label">Esta unidade possui equipamentos, ambientes e infraestrutura adequados para videoconferências ao vivo.</span></label>
-        <label class="option"><input type="radio" name="q4_8" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-
-    <div class="q-card" data-q="q4_9">
-      <div class="q-num">4.9 — Telemonitoramento de Pacientes</div>
-      <div class="q-text">Esta unidade usa tecnologia para monitorar pacientes à distância? Há aparelhos digitais disponíveis, profissionais capacitados e protocolos claros para guiar esse monitoramento?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q4_9" value="1"><span class="option-dot"></span><span class="option-label">Esta unidade não realiza telemonitoramento e não possui nenhum dos itens necessários.</span></label>
-        <label class="option"><input type="radio" name="q4_9" value="2"><span class="option-dot"></span><span class="option-label">Esta unidade possui dispositivos digitais (aparelhos), mas não realiza o serviço de telemonitoramento.</span></label>
-        <label class="option"><input type="radio" name="q4_9" value="3"><span class="option-dot"></span><span class="option-label">Esta unidade realiza telemonitoramento com equipes treinadas e dispositivos digitais, mas sem protocolos e regras claras.</span></label>
-        <label class="option"><input type="radio" name="q4_9" value="4"><span class="option-dot"></span><span class="option-label">Esta unidade realiza telemonitoramento com protocolos bem definidos, equipes treinadas e dispositivos digitais.</span></label>
-        <label class="option"><input type="radio" name="q4_9" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
+      <iframe
+        class="form-embed"
+        src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=9DXYTEBUj0CTo5dfwXw4SseJoanpwQlGvDS1RSuRkplUREI1RjlOOEtVQTFOVDAzSUxJWUU5UVpVRC4u&embed=true"
+        frameborder="0"
+        marginwidth="0"
+        marginheight="0"
+        allowfullscreen
+        webkitallowfullscreen
+        mozallowfullscreen
+        msallowfullscreen>
+      </iframe>
     </div>
   </div>
+</section>
 
-  <!-- BLOCO 5 -->
-  <div class="block">
-    <div class="block-header">
-      <span class="block-num">Bloco 5</span>
-      <span class="block-title">Infoestrutura</span>
-    </div>
-
-    <div class="q-card" data-q="q5_1">
-      <div class="q-num">5.1 — Padrões de Terminologias Clínicas</div>
-      <div class="q-text">Os sistemas utilizados nesta unidade adotam códigos padronizados para registrar doenças, exames e procedimentos? Se sim, é apenas o básico para faturamento ou um conjunto completo que facilita a decisão clínica?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q5_1" value="1"><span class="option-dot"></span><span class="option-label">Não, os sistemas desta unidade não utilizam nenhum código padronizado.</span></label>
-        <label class="option"><input type="radio" name="q5_1" value="2"><span class="option-dot"></span><span class="option-label">Sim, mas apenas os padrões básicos como CID-10, SIGTAP ou RENAME.</span></label>
-        <label class="option"><input type="radio" name="q5_1" value="3"><span class="option-dot"></span><span class="option-label">Sim, os sistemas utilizam vários tipos de códigos padronizados e avançados (CID, CIAP2, LOINC, SNOMED CT, NANDA, etc.).</span></label>
-        <label class="option"><input type="radio" name="q5_1" value="4"><span class="option-dot"></span><span class="option-label">Sim, com uso avançado e sistema que gerencia e converte automaticamente entre diferentes padrões.</span></label>
-        <label class="option"><input type="radio" name="q5_1" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">INMSD – Índice de Maturidade em Saúde Digital</div>
+      <div class="footer-sub">
+        Município de Cáceres – MT · Edição 2026<br>
+        Pesquisa conduzida em parceria com PET Telessaúde UERJ e UNEMAT<br>
+        Apoio: Secretaria Municipal de Saúde de Cáceres
       </div>
     </div>
-
-    <div class="q-card" data-q="q5_2">
-      <div class="q-num">5.2 — Acesso ao SUS Digital Profissional</div>
-      <div class="q-text">O Prontuário Eletrônico utilizado nesta unidade está conectado ao sistema nacional do Ministério da Saúde (SUS Digital), permitindo que os profissionais usem o SUS Digital Profissional?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q5_2" value="1"><span class="option-dot"></span><span class="option-label">Não está conectado ao SUS Digital e não há planos para essa integração.</span></label>
-        <label class="option"><input type="radio" name="q5_2" value="2"><span class="option-dot"></span><span class="option-label">Ainda não está conectado, mas há um plano formal para iniciar essa integração.</span></label>
-        <label class="option"><input type="radio" name="q5_2" value="3"><span class="option-dot"></span><span class="option-label">Já está conectado ao SUS Digital, mas a adoção é baixa e poucos profissionais utilizam ativamente a plataforma.</span></label>
-        <label class="option"><input type="radio" name="q5_2" value="4"><span class="option-dot"></span><span class="option-label">Está conectado ao SUS Digital e a maioria dos profissionais já utiliza ativamente na rotina de trabalho.</span></label>
-        <label class="option"><input type="radio" name="q5_2" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-
-    <div class="q-card" data-q="q5_3">
-      <div class="q-num">5.3 — Instrumentos Digitais para o Cidadão</div>
-      <div class="q-text">Esta unidade ou a Secretaria oferece aplicativos ou sites para os cidadãos atendidos aqui? Se sim, o paciente consegue ver seu histórico E realizar ações como agendamento, com atualizações regulares?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q5_3" value="1"><span class="option-dot"></span><span class="option-label">Não são oferecidos instrumentos digitais para uso dos cidadãos atendidos nesta unidade.</span></label>
-        <label class="option"><input type="radio" name="q5_3" value="2"><span class="option-dot"></span><span class="option-label">Instrumentos digitais são oferecidos, mas o cidadão apenas acessa seus dados de saúde, sem poder agendar serviços.</span></label>
-        <label class="option"><input type="radio" name="q5_3" value="3"><span class="option-dot"></span><span class="option-label">Instrumentos com acesso a dados e serviços (como agendamento) são oferecidos, mas estão desatualizados ou com muitas falhas.</span></label>
-        <label class="option"><input type="radio" name="q5_3" value="4"><span class="option-dot"></span><span class="option-label">Instrumentos digitais são ofertados para dados e serviços, com atualizações regulares e melhoria contínua.</span></label>
-        <label class="option"><input type="radio" name="q5_3" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-
-    <div class="q-card" data-q="q5_4">
-      <div class="q-num">5.4 — Ações de Comunicação e Informação</div>
-      <div class="q-text">Esta unidade ou a Secretaria segue um Plano de Comunicação com estratégia, metas e canais definidos? Esse plano inclui o uso planejado e frequente de plataformas digitais para divulgar informações de saúde?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q5_4" value="1"><span class="option-dot"></span><span class="option-label">Não há Plano de Comunicação.</span></label>
-        <label class="option"><input type="radio" name="q5_4" value="2"><span class="option-dot"></span><span class="option-label">Há Plano de Comunicação, mas não engloba o uso de plataformas digitais.</span></label>
-        <label class="option"><input type="radio" name="q5_4" value="3"><span class="option-dot"></span><span class="option-label">Há Plano de Comunicação, mas engloba poucas ações em plataformas digitais.</span></label>
-        <label class="option"><input type="radio" name="q5_4" value="4"><span class="option-dot"></span><span class="option-label">Há Plano de Comunicação com ações variadas e periódicas em plataformas digitais.</span></label>
-        <label class="option"><input type="radio" name="q5_4" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-
-    <div class="q-card" data-q="q5_5">
-      <div class="q-num">5.5 — Comunicação Digital para Grupos Vulneráveis</div>
-      <div class="q-text">Há ações concretas usando redes sociais ou sites para levar informações de saúde de forma adequada para grupos vulneráveis atendidos nesta unidade (população em situação de rua, povos indígenas, população negra, etc.)?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q5_5" value="1"><span class="option-dot"></span><span class="option-label">Não há nenhuma ação de comunicação digital focada nas necessidades de grupos vulneráveis.</span></label>
-        <label class="option"><input type="radio" name="q5_5" value="2"><span class="option-dot"></span><span class="option-label">Há ações pontuais e isoladas, sem fazer parte de um plano ou programa oficial.</span></label>
-        <label class="option"><input type="radio" name="q5_5" value="3"><span class="option-dot"></span><span class="option-label">Há ações regulares focadas nesses grupos, mas sem orientação de um Plano ou Programa oficial.</span></label>
-        <label class="option"><input type="radio" name="q5_5" value="4"><span class="option-dot"></span><span class="option-label">Há ações frequentes e concretas previstas em um Programa orientador ou Plano oficial.</span></label>
-        <label class="option"><input type="radio" name="q5_5" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-
-    <div class="q-card" data-q="q5_6">
-      <div class="q-num">5.6 — Acessibilidade Digital</div>
-      <div class="q-text">Os sites, aplicativos e canais digitais utilizados ou indicados por esta unidade são acessíveis para pessoas com deficiência visual, auditiva ou motora?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q5_6" value="1"><span class="option-dot"></span><span class="option-label">Os canais digitais não têm recursos de acessibilidade e não seguem as leis ou recomendações aplicáveis.</span></label>
-        <label class="option"><input type="radio" name="q5_6" value="2"><span class="option-dot"></span><span class="option-label">Os canais digitais estão apenas parcialmente adequados, sem cumprir todas as recomendações.</span></label>
-        <label class="option"><input type="radio" name="q5_6" value="3"><span class="option-dot"></span><span class="option-label">Os canais digitais estão totalmente adequados às leis de acessibilidade, mas não são realizados testes para melhorar além do mínimo.</span></label>
-        <label class="option"><input type="radio" name="q5_6" value="4"><span class="option-dot"></span><span class="option-label">Os canais estão adequados às leis E são realizados testes com usuários para melhorar constantemente o acesso para pessoas com deficiência.</span></label>
-        <label class="option"><input type="radio" name="q5_6" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-
-    <div class="q-card" data-q="q5_7">
-      <div class="q-num">5.7 — Gestão do Conhecimento</div>
-      <div class="q-text">Esta unidade possui processos e rotinas para guardar e compartilhar o conhecimento sobre o uso de sistemas e dados de saúde, de forma que todos os profissionais se beneficiem e o trabalho melhore continuamente?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q5_7" value="1"><span class="option-dot"></span><span class="option-label">Não há nenhum plano para guardar e compartilhar o conhecimento nem ações de gestão do conhecimento.</span></label>
-        <label class="option"><input type="radio" name="q5_7" value="2"><span class="option-dot"></span><span class="option-label">Não há plano formal, mas existem ações isoladas que dependem da iniciativa de poucos profissionais.</span></label>
-        <label class="option"><input type="radio" name="q5_7" value="3"><span class="option-dot"></span><span class="option-label">Há um plano definido, mas poucas ações práticas são realizadas para executá-lo.</span></label>
-        <label class="option"><input type="radio" name="q5_7" value="4"><span class="option-dot"></span><span class="option-label">Há uma estratégia bem definida para gestão do conhecimento em saúde digital, com práticas variadas e bem implantadas.</span></label>
-        <label class="option"><input type="radio" name="q5_7" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-
-    <div class="q-card" data-q="q5_8">
-      <div class="q-num">5.8 — Combate à Desinformação</div>
-      <div class="q-text">Esta unidade realiza ou apoia ações para evitar que o excesso de informações e as notícias falsas (fake news) prejudiquem a saúde dos pacientes atendidos aqui?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q5_8" value="1"><span class="option-dot"></span><span class="option-label">Esta unidade não realiza nenhuma ação ou iniciativa para combater notícias falsas.</span></label>
-        <label class="option"><input type="radio" name="q5_8" value="2"><span class="option-dot"></span><span class="option-label">Ainda não combate fake news na prática, mas já há um plano ou planejamento de ações concretas.</span></label>
-        <label class="option"><input type="radio" name="q5_8" value="3"><span class="option-dot"></span><span class="option-label">Realiza poucas ações concretas para combater notícias falsas e divulgar informações confiáveis.</span></label>
-        <label class="option"><input type="radio" name="q5_8" value="4"><span class="option-dot"></span><span class="option-label">Realiza diversas ações concretas: checagem de fatos, comunicação de riscos e divulgação ativa de fontes científicas confiáveis.</span></label>
-        <label class="option"><input type="radio" name="q5_8" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
+    <div class="footer-logos">
+      <img src="https://www.telessaude.uerj.br/site/wp-content/uploads/sites/4/2025/09/PET_HORZINTALCOR-1024x284.png" alt="PET">
+      <img src="https://unemat.br/assets/img/Logo_Unemat.svg" alt="UNEMAT">
+      <img src="https://www.gov.br/transferegov/pt-br/noticias/noticias/arquivos-e-imagens/ministerio-da-saude.png/@@images/image-1200-df740c5814411903e4c0ad9a432f745a.png" alt="Ministério da Saúde">
     </div>
   </div>
+  <hr class="footer-rule">
+  <p class="footer-copy">© 2026 PET Telessaúde UERJ · UNEMAT. Uso exclusivo para fins de pesquisa científica.</p>
+</footer>
 
-  <!-- BLOCO 6 -->
-  <div class="block">
-    <div class="block-header">
-      <span class="block-num">Bloco 6</span>
-      <span class="block-title">Monitoramento, Avaliação e Disseminação de Informações Estratégicas</span>
-    </div>
-
-    <div class="q-card" data-q="q6_1">
-      <div class="q-num">6.1 — Geração e Uso de Indicadores</div>
-      <div class="q-text">Esta unidade utiliza os dados gerados pelos sistemas (Prontuário Eletrônico, etc.) para produzir informações úteis que ajudem profissionais e gestores a tomar melhores decisões no dia a dia?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q6_1" value="1"><span class="option-dot"></span><span class="option-label">Não, esta unidade não realiza análise dos dados gerados pelos sistemas de informação.</span></label>
-        <label class="option"><input type="radio" name="q6_1" value="2"><span class="option-dot"></span><span class="option-label">A análise de dados acontece, mas somente quando alguém da equipe solicita.</span></label>
-        <label class="option"><input type="radio" name="q6_1" value="3"><span class="option-dot"></span><span class="option-label">A análise é realizada apenas para cumprir exigências legais, não para informar o dia a dia.</span></label>
-        <label class="option"><input type="radio" name="q6_1" value="4"><span class="option-dot"></span><span class="option-label">Sim, os dados dos sistemas são analisados e usados para tomar decisões e melhorar os serviços.</span></label>
-        <label class="option"><input type="radio" name="q6_1" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-
-    <div class="q-card" data-q="q6_2">
-      <div class="q-num">6.2 — Avaliação da Saúde Digital</div>
-      <div class="q-text">Esta unidade realiza avaliações para saber se as ferramentas digitais estão funcionando bem? (Ex: taxa de uso do PEP, satisfação dos usuários com a telemedicina.) Essas avaliações são analisadas continuamente?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q6_2" value="1"><span class="option-dot"></span><span class="option-label">Não, esta unidade não realiza avaliação para monitorar a saúde digital.</span></label>
-        <label class="option"><input type="radio" name="q6_2" value="2"><span class="option-dot"></span><span class="option-label">Sim, são realizadas avaliações sobre a qualidade da saúde digital, mas não há análise sobre o acesso dos pacientes.</span></label>
-        <label class="option"><input type="radio" name="q6_2" value="3"><span class="option-dot"></span><span class="option-label">Sim, há avaliações sobre qualidade e investigação sobre acesso quando solicitado.</span></label>
-        <label class="option"><input type="radio" name="q6_2" value="4"><span class="option-dot"></span><span class="option-label">Sim, avaliações sobre qualidade e acesso são realizadas frequentemente e de forma contínua.</span></label>
-        <label class="option"><input type="radio" name="q6_2" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-
-    <div class="q-card" data-q="q6_3">
-      <div class="q-num">6.3 — Análise de Investimentos em Tecnologia</div>
-      <div class="q-text">Esta unidade participa ou contribui com a justificativa técnica sobre o que precisa ser adquirido em tecnologia (softwares, equipamentos) e quanto isso vai custar?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q6_3" value="1"><span class="option-dot"></span><span class="option-label">Não, esta unidade não realiza nenhuma análise sobre os investimentos necessários em tecnologia.</span></label>
-        <label class="option"><input type="radio" name="q6_3" value="2"><span class="option-dot"></span><span class="option-label">A análise de investimentos é feita por outro órgão ou empresa terceirizada, sem participação desta unidade.</span></label>
-        <label class="option"><input type="radio" name="q6_3" value="3"><span class="option-dot"></span><span class="option-label">Esta unidade participa das análises de investimento, mas apenas quando solicitada.</span></label>
-        <label class="option"><input type="radio" name="q6_3" value="4"><span class="option-dot"></span><span class="option-label">Esta unidade participa de forma rotineira e sistemática, usando esses estudos para planejar e justificar gastos em Saúde Digital.</span></label>
-        <label class="option"><input type="radio" name="q6_3" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-
-    <div class="q-card" data-q="q6_4">
-      <div class="q-num">6.4 — Disseminação de Informações Estratégicas</div>
-      <div class="q-text">Esta unidade ou a Secretaria disponibiliza painéis visuais (gráficos, dashboards) para mostrar os indicadores de saúde e o uso dos serviços desta unidade? Esses dados podem ser acessados livremente pelos cidadãos?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q6_4" value="1"><span class="option-dot"></span><span class="option-label">Não há painéis visuais para mostrar os indicadores de saúde e o uso dos serviços desta unidade.</span></label>
-        <label class="option"><input type="radio" name="q6_4" value="2"><span class="option-dot"></span><span class="option-label">Não há painéis próprios, mas são utilizados os painéis do Governo Federal/Ministério da Saúde.</span></label>
-        <label class="option"><input type="radio" name="q6_4" value="3"><span class="option-dot"></span><span class="option-label">Existem painéis para visualização de dados, mas não são disponibilizados abertamente para os cidadãos.</span></label>
-        <label class="option"><input type="radio" name="q6_4" value="4"><span class="option-dot"></span><span class="option-label">Existem painéis com dados atualizados, disponibilizados em formato aberto para uso livre pelos cidadãos.</span></label>
-        <label class="option"><input type="radio" name="q6_4" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-
-    <div class="q-card" data-q="q6_5">
-      <div class="q-num">6.5 — Planejamento no Plano Municipal de Saúde</div>
-      <div class="q-text">As ações de Saúde Digital desta unidade estão previstas e formalizadas no Plano Municipal de Saúde de Cáceres?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q6_5" value="1"><span class="option-dot"></span><span class="option-label">Esta unidade não oferece serviços de tecnologia e não há planejamento de Saúde Digital.</span></label>
-        <label class="option"><input type="radio" name="q6_5" value="2"><span class="option-dot"></span><span class="option-label">Esta unidade já oferece serviços de Saúde Digital, mas não há nenhum planejamento formal sobre a tecnologia.</span></label>
-        <label class="option"><input type="radio" name="q6_5" value="3"><span class="option-dot"></span><span class="option-label">Há planejamento de Saúde Digital, mas não está incluído ou formalizado no Plano Municipal de Saúde.</span></label>
-        <label class="option"><input type="radio" name="q6_5" value="4"><span class="option-dot"></span><span class="option-label">Há planejamento de Saúde Digital E está formalmente incluído no Plano Municipal de Saúde de Cáceres.</span></label>
-        <label class="option"><input type="radio" name="q6_5" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-
-    <div class="q-card" data-q="q6_6">
-      <div class="q-num">6.6 — Contratos de Serviços de Saúde Digital</div>
-      <div class="q-text">Esta unidade utiliza serviços ou sistemas de Saúde Digital contratados (como Teleconsulta ou manutenção de sistemas)? Se sim, esses contratos estão contemplados no Plano Municipal de Saúde de Cáceres?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q6_6" value="1"><span class="option-dot"></span><span class="option-label">Esta unidade não possui nenhum serviço ou ação de Saúde Digital contratado.</span></label>
-        <label class="option"><input type="radio" name="q6_6" value="2"><span class="option-dot"></span><span class="option-label">Possui serviços de Saúde Digital contratados, mas não estão contemplados no Plano Municipal de Saúde.</span></label>
-        <label class="option"><input type="radio" name="q6_6" value="3"><span class="option-dot"></span><span class="option-label">Possui serviços contratados localmente E estão contemplados no Plano Municipal de Saúde.</span></label>
-        <label class="option"><input type="radio" name="q6_6" value="4"><span class="option-dot"></span><span class="option-label">Possui serviços contratados (locais e/ou regionais) E estão contemplados no Plano Municipal de Saúde.</span></label>
-        <label class="option"><input type="radio" name="q6_6" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-  </div>
-
-  <!-- BLOCO 7 -->
-  <div class="block">
-    <div class="block-header">
-      <span class="block-num">Bloco 7</span>
-      <span class="block-title">Infraestrutura e Segurança</span>
-    </div>
-
-    <div class="q-card" data-q="q7_1">
-      <div class="q-num">7.1 — Conectividade</div>
-      <div class="q-text">A internet nesta unidade é rápida e estável o suficiente para que os profissionais usem os sistemas sem lentidão ou quedas que atrapalhem o atendimento?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q7_1" value="1"><span class="option-dot"></span><span class="option-label">Não é adequada: com longos períodos de queda de conexão E muito lenta.</span></label>
-        <label class="option"><input type="radio" name="q7_1" value="2"><span class="option-dot"></span><span class="option-label">Não é adequada: com curtos períodos de queda de conexão E muito lenta.</span></label>
-        <label class="option"><input type="radio" name="q7_1" value="3"><span class="option-dot"></span><span class="option-label">É suficientemente rápida, mas ainda tem curtos períodos de queda que atrapalham o serviço.</span></label>
-        <label class="option"><input type="radio" name="q7_1" value="4"><span class="option-dot"></span><span class="option-label">É rápida e estável o suficiente para o bom funcionamento dos sistemas, sem interrupções.</span></label>
-        <label class="option"><input type="radio" name="q7_1" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-
-    <div class="q-card" data-q="q7_2">
-      <div class="q-num">7.2 — Segurança da Informação</div>
-      <div class="q-text">Esta unidade adota as medidas de segurança da informação abaixo para proteger os dados dos pacientes?<br><small style="color:#666;font-weight:300">(i) Líderes participam do planejamento de identificação e prevenção de riscos aos dados. (ii) Regras claras de uso dos sistemas com firewall IDS/IPS. (iii) Senha e login individual para cada profissional. (iv) Controle rigoroso de acesso por perfil de função.</small></div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q7_2" value="1"><span class="option-dot"></span><span class="option-label">Esta unidade não dispõe de nenhum destes recursos de segurança da informação.</span></label>
-        <label class="option"><input type="radio" name="q7_2" value="2"><span class="option-dot"></span><span class="option-label">Esta unidade dispõe de até 2 dos recursos de segurança da informação listados.</span></label>
-        <label class="option"><input type="radio" name="q7_2" value="3"><span class="option-dot"></span><span class="option-label">Esta unidade dispõe de 3 dos recursos de segurança da informação listados.</span></label>
-        <label class="option"><input type="radio" name="q7_2" value="4"><span class="option-dot"></span><span class="option-label">Esta unidade dispõe dos 4 recursos de segurança da informação listados.</span></label>
-        <label class="option"><input type="radio" name="q7_2" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-
-    <div class="q-card" data-q="q7_3">
-      <div class="q-num">7.3 — Datacenter e Armazenamento em Nuvem</div>
-      <div class="q-text">Os sistemas utilizados nesta unidade estão protegidos contra falhas? Há cópias de segurança em outros locais (nuvem ou datacenter secundário) e capacidade de recuperação rápida em caso de problemas?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q7_3" value="1"><span class="option-dot"></span><span class="option-label">Não existe infraestrutura que garanta a disponibilidade dos sistemas. Qualquer falha pode derrubar o sistema por horas.</span></label>
-        <label class="option"><input type="radio" name="q7_3" value="2"><span class="option-dot"></span><span class="option-label">Há cópias de segurança dos equipamentos E existe um plano para ter cópia dos dados em outro local (datacenter ou nuvem).</span></label>
-        <label class="option"><input type="radio" name="q7_3" value="3"><span class="option-dot"></span><span class="option-label">Há cópias dos sistemas em outro local ou na nuvem E a equipe é treinada para agir rapidamente se o sistema principal falhar.</span></label>
-        <label class="option"><input type="radio" name="q7_3" value="4"><span class="option-dot"></span><span class="option-label">Há proteção em nuvem, equipe treinada E sistemas avançados para gerenciar e automatizar a recuperação tecnológica.</span></label>
-        <label class="option"><input type="radio" name="q7_3" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-
-    <div class="q-card" data-q="q7_4">
-      <div class="q-num">7.4 — Estrutura Física e Equipamentos</div>
-      <div class="q-text">Há computadores em número suficiente para todos os profissionais que precisam usar os sistemas nesta unidade, e esses equipamentos são modernos e rápidos o suficiente para o trabalho?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q7_4" value="1"><span class="option-dot"></span><span class="option-label">Não há computadores suficientes para todos os profissionais E falta espaço físico para colocar novos equipamentos.</span></label>
-        <label class="option"><input type="radio" name="q7_4" value="2"><span class="option-dot"></span><span class="option-label">Faltam computadores, mas há um plano formal para adquirir novos equipamentos e organizar os espaços.</span></label>
-        <label class="option"><input type="radio" name="q7_4" value="3"><span class="option-dot"></span><span class="option-label">Há computadores e espaço suficiente, mas parte dos equipamentos está desatualizada e lenta.</span></label>
-        <label class="option"><input type="radio" name="q7_4" value="4"><span class="option-dot"></span><span class="option-label">Há computadores suficientes para todos, os equipamentos são modernos e rápidos, e o espaço físico é adequado.</span></label>
-        <label class="option"><input type="radio" name="q7_4" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-
-    <div class="q-card" data-q="q7_5">
-      <div class="q-num">7.5 — Arquitetura de Sistemas</div>
-      <div class="q-text">Os servidores e sistemas utilizados nesta unidade são robustos e modernos o suficiente para garantir que o Prontuário Eletrônico e outros serviços não travem nem fiquem lentos, e que todos os sistemas se comuniquem bem entre si?</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q7_5" value="1"><span class="option-dot"></span><span class="option-label">Os sistemas não são adequados e a infraestrutura não consegue suportar o funcionamento dos sistemas de saúde.</span></label>
-        <label class="option"><input type="radio" name="q7_5" value="2"><span class="option-dot"></span><span class="option-label">A infraestrutura atende apenas parcialmente às necessidades E os sistemas têm problemas de comunicação e compatibilidade.</span></label>
-        <label class="option"><input type="radio" name="q7_5" value="3"><span class="option-dot"></span><span class="option-label">A infraestrutura atende apenas parcialmente às necessidades, mas os sistemas são compatíveis e funcionam bem juntos.</span></label>
-        <label class="option"><input type="radio" name="q7_5" value="4"><span class="option-dot"></span><span class="option-label">A infraestrutura atende de forma completa e integral a todas as necessidades e suporta todos os sistemas de informação.</span></label>
-        <label class="option"><input type="radio" name="q7_5" value="0"><span class="option-dot"></span><span class="option-label">Não sei responder.</span></label>
-      </div>
-    </div>
-  </div>
-
-  <div id="error-banner-bottom" style="display:none;background:#FCEBEB;border:1px solid #F09595;border-radius:10px;padding:12px 16px;font-size:13px;color:#A32D2D;margin-bottom:1.5rem;text-align:center;"></div>
-
-  <div class="submit-area">
-    <button class="btn-submit" id="btn-submit" onclick="submitForm()">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-      Enviar respostas
-    </button>
-    <p class="submit-note">Todas as respostas marcadas com * são obrigatórias</p>
-  </div>
-
-</main>
-
-<!-- SUCCESS SCREEN -->
-<div id="success-screen">
-  <div class="success-icon">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-  </div>
-  <h2>Respostas enviadas com sucesso!</h2>
-  <p>Obrigado pela participação. As respostas desta unidade foram registradas na planilha da Secretaria Municipal de Saúde de Cáceres.</p>
-</div>
-
-<script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxx7SonYrVW0UFagPXGpTN7okklj_DPKdi61psX6z2EdThRTPXGHOLwyLuVK_flJnECaQ/exec";
-
-const QUESTIONS = ["q1_1","q1_2","q1_3","q1_4","q1_5","q2_1","q2_2","q2_3","q2_4","q3_1","q3_2","q3_3","q3_4","q3_5","q4_1","q4_2","q4_3","q4_4","q4_5","q4_6","q4_7","q4_8","q4_9","q5_1","q5_2","q5_3","q5_4","q5_5","q5_6","q5_7","q5_8","q6_1","q6_2","q6_3","q6_4","q6_5","q6_6","q7_1","q7_2","q7_3","q7_4","q7_5"];
-
-document.querySelectorAll('.option').forEach(function(opt) {
-  opt.addEventListener('click', function() {
-    var name = this.querySelector('input[type="radio"]').name;
-    document.querySelectorAll('input[name="' + name + '"]').forEach(function(r) {
-      r.closest('.option').classList.remove('selected');
-    });
-    this.querySelector('input[type="radio"]').checked = true;
-    this.classList.add('selected');
-    var card = this.closest('.q-card');
-    if (card) card.classList.remove('has-error');
-    updateProgress();
-  });
-});
-
-function updateProgress() {
-  var answered = 0;
-  QUESTIONS.forEach(function(q) {
-    if (document.querySelector('input[name="' + q + '"]:checked')) answered++;
-  });
-  var pct = Math.round((answered / QUESTIONS.length) * 100);
-  document.getElementById('progress-fill').style.width = pct + '%';
-  document.getElementById('progress-label').textContent = answered + ' de ' + QUESTIONS.length + ' perguntas respondidas';
-}
-
-function submitForm() {
-  var errors = [];
-
-  var unidade = document.getElementById('id_unidade').value.trim();
-  var tipo = document.getElementById('id_tipo').value;
-  var responsavel = document.getElementById('id_responsavel').value.trim();
-  var cargo = document.getElementById('id_cargo').value.trim();
-  var data = document.getElementById('id_data').value;
-
-  if (!unidade || !tipo || !responsavel || !cargo || !data) {
-    errors.push('Preencha todos os campos obrigatórios de identificação da unidade.');
-  }
-
-  QUESTIONS.forEach(function(q) {
-    if (!document.querySelector('input[name="' + q + '"]:checked')) {
-      errors.push(q);
-      var card = document.querySelector('[data-q="' + q + '"]');
-      if (card) card.classList.add('has-error');
-    }
-  });
-
-  var errBanner = document.getElementById('error-banner-bottom');
-  if (errors.length > 0) {
-    var unanswered = errors.filter(function(e){ return e.startsWith('q'); }).length;
-    var msg = '';
-    if (!unidade || !tipo || !responsavel || !cargo || !data) msg += 'Preencha todos os campos de identificação. ';
-    if (unanswered > 0) msg += unanswered + ' pergunta(s) sem resposta. Role a página para encontrá-las.';
-    errBanner.textContent = msg;
-    errBanner.style.display = 'block';
-    var firstErr = document.querySelector('.q-card.has-error, .id-section');
-    if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    return;
-  }
-
-  errBanner.style.display = 'none';
-  var btn = document.getElementById('btn-submit');
-  btn.disabled = true;
-  btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg> Enviando...';
-
-  var payload = {
-    "Data": data,
-    "Unidade": unidade,
-    "Tipo": tipo,
-    "Responsavel": responsavel,
-    "Cargo": cargo,
-    "Email": document.getElementById('id_email').value.trim()
-  };
-
-  QUESTIONS.forEach(function(q) {
-    var checked = document.querySelector('input[name="' + q + '"]:checked');
-    payload[q.toUpperCase()] = checked ? checked.value : '';
-  });
-
-  fetch(SCRIPT_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  }).then(function() {
-    document.getElementById('form-area').style.display = 'none';
-    document.querySelector('.progress-bar-wrap').style.display = 'none';
-    document.getElementById('success-screen').style.display = 'block';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }).catch(function() {
-    btn.disabled = false;
-    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Enviar respostas';
-    errBanner.textContent = 'Erro ao enviar. Verifique sua conexão e tente novamente.';
-    errBanner.style.display = 'block';
-  });
-}
-
-document.getElementById('id_data').value = new Date().toISOString().split('T')[0];
-updateProgress();
-</script>
 </body>
 </html>
