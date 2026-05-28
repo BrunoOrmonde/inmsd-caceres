@@ -435,7 +435,7 @@ section { padding: 3rem 1.25rem; }
 }
 .form-topbar-title { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.85); letter-spacing: 0.03em; line-height: 1.4; }
 .form-topbar-badge { font-size: 11px; color: #89c8e8; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; }
-.form-embed { width: 100%; height: 2800px; border: none; display: block; overflow: hidden; background: var(--white); }
+.form-embed { width: 100%; height: 500px; border: none; display: block; background: var(--white); transition: height 0.4s ease; }
 
 /* ═══ MOBILE FLOATING CTA BAR ═══ */
 .mobile-cta-bar {
@@ -862,6 +862,36 @@ if (formSection && mobileCta) {
   }, { threshold: 0.15 });
   ctaObserver.observe(formSection);
 }
+
+// Altura dinâmica do iframe do Google Forms
+(function () {
+  const iframe = document.querySelector('.form-embed');
+  if (!iframe) return;
+
+  // Google Forms envia postMessage com a altura real
+  window.addEventListener('message', function (e) {
+    if (e.origin !== 'https://docs.google.com') return;
+    try {
+      const data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+      const h = data && (data.height || data.frameHeight);
+      if (h && isFinite(h) && +h > 200) {
+        iframe.style.height = (Math.ceil(+h) + 32) + 'px';
+      }
+    } catch (_) {}
+  });
+
+  // Fallback: tenta ler altura ao carregar (funciona se não for cross-origin)
+  // Se falhar (cross-origin), usa altura generosa como segurança
+  iframe.addEventListener('load', function () {
+    try {
+      const h = iframe.contentWindow.document.body.scrollHeight;
+      if (h > 200) iframe.style.height = h + 'px';
+    } catch (_) {
+      // Cross-origin: aplica altura segura somente se ainda estiver pequeno
+      if (iframe.offsetHeight < 800) iframe.style.height = '2695px';
+    }
+  });
+})();
 </script>
 
 </body>
